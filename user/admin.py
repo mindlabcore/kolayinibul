@@ -11,3 +11,5 @@ class ProfileAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Profile
+
+# test
