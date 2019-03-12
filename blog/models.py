@@ -31,7 +31,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50, verbose_name="Story Title")
     slug = models.SlugField(max_length=55, blank=True, null=True)
     description = RichTextField(max_length=100000, null=False)
-    image = models.ImageField(upload_to='story_images/', null=True,
+    image = models.ImageField(upload_to='story_images/', null=True, blank=True,
                               default='')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
     verified_date = models.DateTimeField(auto_now_add=True, verbose_name="Verified Date")

@@ -8,8 +8,9 @@ from .models import Profile, Avatar
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "job"]
     list_display_links = ["id", "user", "job"]
+    filter_horizontal = ('post',)
+
+    #  filter horizontal'ı araştır. Tam buraya m2m ile koyabilirsin.
 
     class Meta:
         model = Profile
-
-# test
