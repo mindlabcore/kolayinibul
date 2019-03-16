@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Login - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+
+{% block body %}
+
+
+    <section class="s-content">
+
+        {% csrf_token %}
+
+
+        <div class="row" style="
+        display: flex;
+        justify-content: center;
+        flex-flow:row wrap;">
+
+            <div class="col-six tab-full">
+
+                <h3 class="add-bottom">Login</h3>
+
+                <form method="post" action="{% url 'user:login' %}">
+                    <div>
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                    </div>
+                    <input class="btn--primary" type="submit" value="Submit">
+
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}
+

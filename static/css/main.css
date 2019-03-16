@@ -1741,7 +1741,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .s-pageheader--home {
+   /**
    min-height: 480px;
+    **/
    padding-top: 222px;
 }
 

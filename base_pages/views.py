@@ -50,7 +50,7 @@ def my_profile(request):
     else:
         products = Product.objects.filter(seller=request.user)
     """
-    posts = Post.objects.filter(seller=request.user)
+    posts = Post.objects.filter(author=request.user)
     context = {
         "posts": posts  # adsafas
     }

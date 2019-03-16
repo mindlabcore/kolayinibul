@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from blog.models import Post, Category, SubCategory
+from django.contrib.auth.models import AbstractUser
 
 
 class Avatar(models.Model):
@@ -15,8 +16,13 @@ class Avatar(models.Model):
     model_pic = models.ImageField(upload_to='avatars/')
 
 
+class UsersPosts(models.Model):
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    posts = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, related_name='user_profile')
     slug = models.SlugField(max_length=55, blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
@@ -25,7 +31,7 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     job = models.CharField(max_length=30, blank=True)
     skills = models.ManyToManyField(SubCategory)
-    post = models.ManyToManyField(Post, blank=True, related_name="Stories")
+    post = models.ManyToManyField(User, through='UsersPosts', blank=True)
     followers = models.ManyToManyField(User, blank=True, verbose_name="Followers", related_name="Followers")
     following = models.ManyToManyField(User, blank=True, verbose_name="Following", related_name="Following")
 

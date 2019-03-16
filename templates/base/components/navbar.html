@@ -11,7 +11,9 @@
 
             <div class="header__logo">
                 <a class="logo" href="{% url "index" %}">
-                    <img style="width: 120px; height: 120px" src="{% static 'logo/1781596764_b4fdb39e-54f8-49cd-b7db-7fe8b753a9f5 (1).png' %}" alt="Homepage">
+                    <img style="width: 120px; height: 120px"
+                         src="{% static 'logo/1781596764_b4fdb39e-54f8-49cd-b7db-7fe8b753a9f5 (1).png' %}"
+                         alt="Homepage">
                 </a>
             </div> <!-- end header__logo -->
 
@@ -59,7 +61,6 @@
                     <li class="has-children">
                         <a href="#0" title="">Categories</a>
                         <ul class="sub-menu">
-                            <li><a href="category.html">Lifestyle</a></li>
                             <li><a href="category.html">Health</a></li>
                             <li><a href="category.html">Family</a></li>
                             <li><a href="category.html">Management</a></li>
@@ -76,10 +77,24 @@
                             <li><a href="single-standard.html">Standard Post</a></li>
                         </ul>
                     </li>
-                    <li><a href="style-guide.html" title="">Styles</a></li>
                     <li><a href="about.html" title="">About</a></li>
                     <li><a href="contact.html" title="">Contact</a></li>
-                </ul> <!-- end header__nav -->
+                    {% if request.user.is_authenticated %}
+                        <li class="has-children">
+                            <a href="#0" title="">Profile</a>
+                            <ul class="sub-menu">
+                                <li><a href="{% url 'my_profile' %}">Profile</a></li>
+                                <li><a href="single-video.html">bla</a></li>
+                                <li><a href="single-video.html">bla</a></li>
+                                <li><a href="single-video.html">bla</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'user:login' %}" title="">Login</a></li>
+                        <li><a href="{% url 'user:sign_up' %}" title="">Sign Up</a></li>
+                        </ul>
+                    {% endif %}
+                 <!-- end header__nav -->
 
                 <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 
@@ -89,5 +104,11 @@
         <!-- header-content -->
     </header> <!-- header -->
     <hr>
-{% include 'base/components/page_header_content.html' %}
+
+{% url 'index' as current_url  %}
+{% if request.get_full_path == current_url %}
+    {% include 'base/components/page_header_content.html' %}
+    {% else %}
+{% endif %}
+
 </section>

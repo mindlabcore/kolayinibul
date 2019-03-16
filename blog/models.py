@@ -38,6 +38,15 @@ class Post(models.Model):
     active_post = models.BooleanField(default=True)
     tag = models.ManyToManyField(SubCategory)
 
+    def save(self, *args, **kwargs):
+        print(self.title)
+
+        if not self.slug:
+            self.slug = self.get_slug()
+            print(self.slug)
+        print(self.title)
+        super(Post, self).save(*args, **kwargs)
+
     def __str__(self):
         return "{title} - {pk}".format(pk=self.pk, title=self.title)
 
