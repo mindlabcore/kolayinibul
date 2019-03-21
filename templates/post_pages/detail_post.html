@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+{% block body %}
+
+    <section class="s-content">
+        <section id="styles" class="s-styles">
+
+            <div class="row narrow section-intro add-bottom text-center">
+
+                <div class="col-twelve tab-full">
+
+
+                    <h1>{{ post.title|upper }}</h1>
+                    <div class="row bottom tags-wrap">
+                        <div class="col-full tags">
+                            <div class="tagcloud">
+                                {% for a in tag %}
+                                    <a href="#0">{{ a.sub_category_name }}</a>
+                                {% endfor %}
+
+                            </div>
+                        </div> <!-- end tags -->
+                    </div> <!-- end tags-wrap -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-full tab-full">
+                    <p>
+                        {{ post.description|safe }}
+                    </p>
+                </div>
+            </div>
+        </section>
+    </section>
+
+{% endblock body %}

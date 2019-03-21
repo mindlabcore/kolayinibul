@@ -38,9 +38,9 @@
 
                 <form role="search" method="get" class="header__search-form" action="#">
                     <label>
-                        <span class="hide-content">Search for:</span>
+                        <span class="hide-content">Ne arıyorsun?</span>
                         <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s"
-                               title="Search for:" autocomplete="off">
+                               title="Search for:" autocomplete="on">
                     </label>
                     <input type="submit" class="search-submit" value="Search">
                 </form>
@@ -57,19 +57,29 @@
                 <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                 <ul class="header__nav">
-                    <li class="current"><a href="{% url "index" %}" title="">Home</a></li>
                     <li class="has-children">
-                        <a href="#0" title="">Categories</a>
+                        <a href="#0" title="">Kategoriler</a>
                         <ul class="sub-menu">
-                            <li><a href="category.html">Health</a></li>
+
                             <li><a href="category.html">Family</a></li>
                             <li><a href="category.html">Management</a></li>
                             <li><a href="category.html">Travel</a></li>
+
+                            <li> <a class="" href="#">Sport </a>
+
+                                <ul class="sub-menu">
+                                    <a class="" href="#">Sport </a> <a class="" href="#">Sport </a>
+
+                                </ul>
+
+                                </li>
+
+
                             <li><a href="category.html">Work</a></li>
                         </ul>
                     </li>
                     <li class="has-children">
-                        <a href="#0" title="">Blog</a>
+                        <a href="#0" title="">Yazarlar</a>
                         <ul class="sub-menu">
                             <li><a href="single-video.html">Video Post</a></li>
                             <li><a href="single-audio.html">Audio Post</a></li>
@@ -77,21 +87,20 @@
                             <li><a href="single-standard.html">Standard Post</a></li>
                         </ul>
                     </li>
-                    <li><a href="about.html" title="">About</a></li>
-                    <li><a href="contact.html" title="">Contact</a></li>
+                    <li><a href="about.html" title="">Popüler Yazılar</a></li>
+                    <li><a href="contact.html" title="">İş İlanları</a></li>
                     {% if request.user.is_authenticated %}
                         <li class="has-children">
-                            <a href="#0" title="">Profile</a>
+                            <a href="#0" title="">{{ request.user.username }}</a>
                             <ul class="sub-menu">
-                                <li><a href="{% url 'my_profile' %}">Profile</a></li>
-                                <li><a href="single-video.html">bla</a></li>
-                                <li><a href="single-video.html">bla</a></li>
-                                <li><a href="single-video.html">bla</a></li>
+                                <li><a href="{% url 'my_profile' %}">Profil Sayfam</a></li>
+                                <li><a href="single-video.html">Şifremi Değiştir</a></li>
+                                <li><a href="{% url 'user:logout' %}">Çıkış Yap</a></li>
                             </ul>
                         </li>
                     {% else %}
-                        <li><a href="{% url 'user:login' %}" title="">Login</a></li>
-                        <li><a href="{% url 'user:sign_up' %}" title="">Sign Up</a></li>
+                        <li><a href="{% url 'user:login' %}" title="">Giriş Yap</a></li>
+                        <li><a href="{% url 'user:sign_up' %}" title="">Kayıt Ol</a></li>
                         </ul>
                     {% endif %}
                  <!-- end header__nav -->

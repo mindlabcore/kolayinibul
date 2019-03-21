@@ -27,8 +27,14 @@ def posts(request):
 def detail(request, slug):
     # story = Story.objects.filter(id = id).first()
     post = get_object_or_404(Post, slug=slug)
+    tag = post.tag.all()
     # story = Story.objects.filter(slug=slug)
-    return render(request, "post_pages/detail_post.html", {"post": post})
+    context = {
+        "post": post,
+        "tag": tag,
+
+    }
+    return render(request, "post_pages/detail_post.html", context)
 
 
 @login_required

@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ["id", "category_name", "sub_category_name"]
+    list_display = ["id", "category_name", "sub_category_image","sub_category_name"]
     list_display_links = ["id", "category_name", "sub_category_name"]
 
     class Meta:

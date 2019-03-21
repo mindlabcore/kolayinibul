@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
-from .models import Avatar, Profile
+from .models import Profile
 
 
 def sign_up(request):
@@ -82,7 +82,8 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, "Logout successful! Goodbye motherfucker! :)")
-    return render(request, "login_logout_signup/logout.html")
+    #  return render(request, "login_logout_signup/logout.html")
+    return redirect("index")
 
 
 def send_reset_link(request):
