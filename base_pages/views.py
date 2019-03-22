@@ -51,8 +51,9 @@ def my_profile(request):
         products = Product.objects.filter(seller=request.user)
     """
     posts = Post.objects.filter(author=request.user)
+    #  posts = get_object_or_404(Post, author=request.user)
     context = {
-        "posts": posts  # adsafas
+        "posts": posts
     }
 
     return render(request, "profile_pages/my_profile.html", context)

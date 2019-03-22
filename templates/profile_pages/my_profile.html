@@ -1,10 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}{{ post.title }} - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+{% block body %}
+
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+            <br>
+
+
+            <div class="row add-bottom">
+            <h1>Tüm Yazılarım</h1>
+                <div class="col-twelve">
+                    <div class="table-responsive">
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="text-align: center">Başlık</th>
+                                <th style="text-align: center">Kategori</th>
+                                <th style="text-align: center">Alt Kategori</th>
+                                <th style="text-align: center">Eklenme Tarihi</th>
+                                <th style="text-align: center">Okunma</th>
+                                <th style="text-align: center">Beğenme</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for story in posts %}
+                                <tr>
+                                    <td>{{ story.title }}</td>
+                                    <td>{{ story.category }}</td>
+                                    <td>{{ story.sub_category }}</td>
+                                    <td>{{ story.created_date }}</td>
+                                    <td>17763</td>
+                                    <td>4543</td>
+                                    <td><a href="/stories/update/{{ story.slug }}" class="btn btn-info">Düzenle</a></td>
+                                    <td><a href="/stories/delete/{{ story.slug }}" class="btn btn-info">Sil</a></td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div> <!-- end row -->
+        </section>
+    </section>
+{% endblock body %}
