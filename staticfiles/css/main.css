@@ -1897,7 +1897,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .header__search-form::after {
-    content: "Press Enter to begin your search.";
+    content: "Bir şeyler yaz!";
     display: block;
     letter-spacing: 0.6px;
     font-size: 1.6rem;
@@ -3749,6 +3749,7 @@ footer h4::after {
     list-style: none;
     margin-left: 0;
     font-family: 'Comfortaa', cursive;
+    font-weight: 700;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -4267,3 +4268,30 @@ footer h4::after {
 }
 
 /* -------------------------------------------------------------------
+
+
+ */
+
+.writeButton {
+    background-color: #efc702;
+    -moz-border-radius: 42px;
+    -webkit-border-radius: 42px;
+    border-radius: 42px;
+    display: inline-block;
+    cursor: pointer;
+    color: #000000;
+    font-family: 'Comfortaa', cursive;
+    font-size: 17px;
+    padding: 0px 18px;
+    text-decoration: none;
+    text-shadow: 0px 0px 0px #2f6627;
+}
+
+.writeButton:hover {
+    background-color: #efc702;
+}
+
+.writeButton:active {
+    position: relative;
+    top: 1px;
+}

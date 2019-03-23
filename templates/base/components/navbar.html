@@ -70,15 +70,15 @@
                                 <li><a class="" href="#">{{ category.category_name }}</a>
 
 
-                                        <ul class="sub-menu">
+                                    <ul class="sub-menu">
 
-                                            {% for sub_category in category.subcategories.all %}
+                                        {% for sub_category in category.subcategories.all %}
                                             <a class="" href="#">
                                                 {{ sub_category }}
                                             </a>
-                                            {% endfor %}
+                                        {% endfor %}
 
-                                        </ul>
+                                    </ul>
 
 
                                 </li>
@@ -105,14 +105,18 @@
                                 <li><a href="{% url 'user:logout' %}">Çıkış Yap</a></li>
                             </ul>
                         </li>
+
                     {% else %}
                         <li><a href="{% url 'user:login' %}" title="">Giriş Yap</a></li>
                         <li><a href="{% url 'user:sign_up' %}" title="">Kayıt Ol</a></li>
-                        </ul>
+
+
                     {% endif %}
-                <li>
-                    <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını Yaz</a>
-                </li>
+            <li>
+                            <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını
+                                Yaz</a>
+                        </li>
+</ul>
                 <!-- end header__nav -->
 
                 <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
