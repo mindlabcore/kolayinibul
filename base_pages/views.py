@@ -11,7 +11,7 @@ from django.db.models import Q
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.filter(active_post=True)
+    posts = Post.objects.filter(active_post="2")
     context = {
         "posts": posts,
     }
@@ -63,7 +63,7 @@ def search_view(request):
         search_key = request.GET.get("s")
         print(search_key)
         if search_key:
-            context["searching_posts"] = Post.objects.filter(active_post=True).filter(
+            context["searching_posts"] = Post.objects.filter(active_post="2").filter(
                 Q(title__icontains=search_key) | Q(description__icontains=search_key)
 
             )
@@ -73,3 +73,11 @@ def search_view(request):
 
 def job_page_coming_soon(request):
     return render(request, "job_pages/coming_soon.html")
+
+
+def categories(request):
+    categories = Category.objects.all()
+    context = {
+        "categories": categories,
+    }
+    return context

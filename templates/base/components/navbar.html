@@ -16,20 +16,26 @@
                          alt="Homepage">
                 </a>
             </div> <!-- end header__logo -->
-
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            >
             <ul class="header__social">
+
                 <li>
-                    <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 </li>
                 <li>
-                    <a href="#0"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="https://twitter.com/kolayinibul" target="_blank"><i class="fab fa-twitter"></i></a>
                 </li>
                 <li>
-                    <a href="#0"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/kolayinibul" target="_blank"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li>
-                    <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="#0" target="_blank"><i class="fab fa-youtube"></i></a>
                 </li>
+                <li>
+                    <a href="" target="_blank"><i class="fab fa-github"></i></a>
+                </li>
+
             </ul> <!-- end header__social -->
 
             <a class="header__search-trigger" href="#0"></a>
@@ -39,7 +45,7 @@
                 <form role="search" method="get" class="header__search-form" action="{% url 'search_view' %}">
                     <label>
                         <span class="hide-content">Ne arıyorsun?</span>
-                        <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s"
+                        <input type="search" class="search-field" placeholder="Bir şeyler yaz!" value="" name="s"
                                title="Search for:" autocomplete="on" id="search_def">
                     </label>
                     <input type="submit" class="search-submit" value="Search">
@@ -60,22 +66,23 @@
                     <li class="has-children">
                         <a href="#0" title="">Kategoriler</a>
                         <ul class="sub-menu">
+                            {% for category in categories %}
+                                <li><a class="" href="#">{{ category.category_name }}</a>
 
-                            <li><a href="category.html">Family</a></li>
-                            <li><a href="category.html">Management</a></li>
-                            <li><a href="category.html">Travel</a></li>
 
-                            <li> <a class="" href="#">Sport </a>
+                                        <ul class="sub-menu">
 
-                                <ul class="sub-menu">
-                                    <a class="" href="#">Sport </a> <a class="" href="#">Sport </a>
+                                            {% for sub_category in category.subcategories.all %}
+                                            <a class="" href="#">
+                                                {{ sub_category }}
+                                            </a>
+                                            {% endfor %}
 
-                                </ul>
+                                        </ul>
+
 
                                 </li>
-
-
-                            <li><a href="category.html">Work</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                     <li class="has-children">
@@ -88,7 +95,7 @@
                         </ul>
                     </li>
                     <li><a href="about.html" title="">Popüler Yazılar</a></li>
-                    <li><a href="contact.html" title="">İş İlanları</a></li>
+                    <li><a href="{% url 'job_page_coming_soon' %}" title="">İş İlanları</a></li>
                     {% if request.user.is_authenticated %}
                         <li class="has-children">
                             <a href="#0" title="">{{ request.user.username }}</a>
@@ -103,7 +110,10 @@
                         <li><a href="{% url 'user:sign_up' %}" title="">Kayıt Ol</a></li>
                         </ul>
                     {% endif %}
-                 <!-- end header__nav -->
+                <li>
+                    <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını Yaz</a>
+                </li>
+                <!-- end header__nav -->
 
                 <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
 
@@ -114,10 +124,10 @@
     </header> <!-- header -->
     <hr>
 
-{% url 'index' as current_url  %}
-{% if request.get_full_path == current_url %}
-    {% include 'base/components/page_header_content.html' %}
+    {% url 'index' as current_url %}
+    {% if request.get_full_path == current_url %}
+        {% include 'base/components/page_header_content.html' %}
     {% else %}
-{% endif %}
+    {% endif %}
 
 </section>

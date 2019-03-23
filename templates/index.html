@@ -51,7 +51,7 @@
 
                             <div class="entry__excerpt">
                                 <p>
-                                    {{ post.description|safe|truncatewords:32 }}
+                                    {{ post.description|striptags|truncatewords:28|safe }}
                                 </p>
                             </div>
 
@@ -70,7 +70,7 @@
 
                                 <div class="entry__meta">
                             <span class="entry__meta-links">
-                                {% for tag in post.tag.all %}
+                                {% for tag in post.tag.all|slice:":3" %}
                                     <a href="{% url 'posts:categories' id=post.category_id %}">
                                 {{ tag }}
                                 </a>

@@ -3,11 +3,12 @@ from .forms import PostForm
 from django.contrib import messages
 from .models import Post, Category, SubCategory
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 def categories(request, id):
     # categories = get_object_or_404(Product,id = id)
-    posts = Post.objects.filter(active_post=True).filter(category=id)
+    posts = Post.objects.filter(active_post="2").filter(category=id)
     context = {
         "posts": posts,
 
@@ -53,6 +54,7 @@ def add_post(request):
 
 @login_required
 def update_post(request, slug):
+    #  Profile sayfası.
     post = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
     if post.author != request.user:
@@ -63,6 +65,7 @@ def update_post(request, slug):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            post.updated_date = timezone.now()
             post.save()
             messages.success(request, "Post changed successful!")
             return redirect("posts:detail", slug=post.slug)
@@ -75,14 +78,14 @@ def update_post(request, slug):
 
 @login_required
 def delete_post(request, slug):
-    #  Silmek yerine passive yapsak daha iyi olur.
+    #  Silmek yerine passive yapsak daha iyi olur. Profile sayfası.
     post = get_object_or_404(Post, slug=slug)
     #  post.delete()
     if post.author == request.user:
-        if post.active_post == True:
-            post.active_post = False
+        if post.active_post == "2":
+            post.active_post = "4"
         else:
-            post.active_post = True
+            post.active_post = "2"
             post.save()
             messages.success(request, "Post yayından kaldırıldı!")
     else:

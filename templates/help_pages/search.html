@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% block body %}
 
-</body>
-</html>
+
+
+    <section class="s-content">
+
+        <div class="row masonry-wrap">
+            <div class="masonry">
+                <div class="grid-sizer"></div>
+                {% for post in searching_posts %}
+                    <article class="masonry__brick entry format-standard" data-aos="fade-up">
+
+                        <div class="entry__thumb">
+                            <a href="{% url 'posts:detail' slug=post.slug %}" class="entry__thumb-link">
+                                <img src="images/thumbs/masonry/tulips-400.jpg"
+                                     srcset="images/thumbs/masonry/tulips-400.jpg 1x, images/thumbs/masonry/tulips-800.jpg 2x"
+                                     alt="">
+                            </a>
+                        </div>
+
+                        <div class="entry__text">
+                            <div class="entry__header">
+
+                                <!-- LikeBtn.com BEGIN -->
+                                <span class="likebtn-wrapper" data-lang="tr" data-i18n_like="xxx"
+                                      data-rich_snippet="true" data-identifier="item_1" data-show_like_label="false"
+                                      data-counter_clickable="true" data-loader_show="true"></span>
+                                <script>(function (d, e, s) {
+                                    if (d.getElementById("likebtn_wjs")) return;
+                                    a = d.createElement(e);
+                                    m = d.getElementsByTagName(e)[0];
+                                    a.async = 1;
+                                    a.id = "likebtn_wjs";
+                                    a.src = s;
+                                    m.parentNode.insertBefore(a, m)
+                                })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
+                                <!-- LikeBtn.com END -->
+
+
+                                <div class="entry__date" style="text-align: right">
+                                    <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.created_date }}</a>
+
+                                </div>
+                                <h1 class="entry__title"><a
+                                        href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a>
+                                </h1>
+
+                            </div>
+
+                            <div class="entry__excerpt">
+                                <p>
+                                    {{ post.description|striptags|truncatewords:28|safe }}
+                                </p>
+                            </div>
+
+
+                            <div class="entry__content">
+                                <a href="{% url 'index' %}" class="entry__profile-pic">
+                                    <img class="avatar" src="{{ post.author.profile.avatar.url }}" alt="">
+                                </a>
+
+                                <div class="entry__date">
+                                    <a href="{% url 'user:profile' slug=post.author %}">&nbsp{{ post.author }}</a>
+
+                                </div>
+                                <br>
+
+
+                                <div class="entry__meta">
+                            <span class="entry__meta-links">
+                                {% for tag in post.tag.all|slice:":3" %}
+                                    <a href="{% url 'posts:categories' id=post.category_id %}">
+                                {{ tag }}
+                                </a>
+                                {% endfor %}
+                            </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </article> <!-- end article -->
+                {% endfor %}
+
+            </div> <!-- end masonry -->
+        </div> <!-- end masonry-wrap -->
+
+        <div class="row">
+            <div class="col-full">
+                <nav class="pgn">
+                    <ul>
+                        <li><a class="pgn__prev" href="#0">Prev</a></li>
+                        <li><a class="pgn__num" href="#0">1</a></li>
+                        <li><span class="pgn__num current">2</span></li>
+                        <li><a class="pgn__num" href="#0">3</a></li>
+                        <li><a class="pgn__num" href="#0">4</a></li>
+                        <li><a class="pgn__num" href="#0">5</a></li>
+                        <li><span class="pgn__num dots">…</span></li>
+                        <li><a class="pgn__num" href="#0">8</a></li>
+                        <li><a class="pgn__next" href="#0">Next</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </section> <!-- s-content -->
+
+{% endblock body %}

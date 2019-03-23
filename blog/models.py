@@ -16,7 +16,7 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
-    category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='subcategories')
     sub_category_name = models.CharField(max_length=50, verbose_name="Sub-Category Name")
     sub_category_image = models.FileField(upload_to='sub_category_images/', null=True, blank=True)
 
@@ -35,8 +35,20 @@ class Post(models.Model):
     image = models.ImageField(upload_to='story_images/', null=True, blank=True,
                               default='')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
+    updated_date = models.DateTimeField(blank=True, null=True, verbose_name="Updated Date")
     verified_date = models.DateTimeField(auto_now_add=True, verbose_name="Verified Date")
-    active_post = models.BooleanField(default=True)
+
+    STATUS_DRAFT = 1
+    STATUS_PUBLISHED = 2
+    STATUS_ARCHIVED = 3
+    STATUS_DEACTIVATED = 4
+    STATUSES = (
+        (STATUS_DRAFT, 'Taslak'),
+        (STATUS_PUBLISHED, 'Yayında'),
+        (STATUS_ARCHIVED, 'Arşivlendi'),
+        (STATUS_DEACTIVATED, 'Kaldırıldı')
+    )
+    active_post = models.SmallIntegerField(choices=STATUSES, default="2")
     tag = models.ManyToManyField(SubCategory)
 
     def save(self, *args, **kwargs):

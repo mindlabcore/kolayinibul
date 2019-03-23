@@ -22,7 +22,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["id", "category", "title", "author", "created_date"]
+    list_display = ["id", "category", "title", "author", "created_date", "updated_date", "active_post"]
 
     class Meta:
         model = Post
