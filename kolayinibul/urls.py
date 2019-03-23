@@ -29,7 +29,7 @@ urlpatterns = [
     path('accounts/login', include('django.contrib.auth.urls')),
 
     # blog App:
-    path('posts/', include("blog.urls", namespace="blog")),
+    path('posts/', include("blog.urls", namespace="posts")),
 
     # base_pages App:
     path('', base_pages_view.index, name="index"),

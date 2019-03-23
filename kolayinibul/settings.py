@@ -137,6 +137,13 @@ CKEDITOR_CONFIGS = {
         "removePlugins": "stylesheetparser",
         "allowedContent": True,
         "width": "100%",
+    },
+    "special": {
+        "toolbar": "Special",
+        "toolbar_Special": [
+            ['Bold'], ['CodeSnippet'],  # < here
+        ],
+        "extraPlugins": 'codesnippet',  # < here
     }
 }
 
@@ -145,4 +152,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = ''
 LOGIN_URL = '/user/login/'
-

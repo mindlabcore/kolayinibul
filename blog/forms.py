@@ -8,6 +8,6 @@ class PostForm(forms.ModelForm):
 
         fields = [
 
-            "category", "sub_category", "title", "description"
+            "category", "sub_category", "title", "description", "tag"
 
         ]

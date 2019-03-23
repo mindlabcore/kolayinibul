@@ -18,7 +18,7 @@ def categories(request, id):
 def posts(request):
     posts = Post.objects.all()
     context = {
-        "posts": posts
+        "posts": posts,
     }
     return render(request, context)
 
@@ -45,32 +45,46 @@ def add_post(request):
         story = form.save(commit=False)
         story.author = request.user
         story.save()
-        messages.success(request, "Post created successful!")
-        return redirect("index")
+        messages.success(request, "Post başarıyla oluşturuldu!")
+        return redirect("my_profile")
 
     return render(request, "post_pages/new_post.html", {"form": form})
 
 
 @login_required
-def update_post(request, id):
-    post = get_object_or_404(Post, id=id)
+def update_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
-    if form.is_valid():
-        post = form.save(commit=False)
-        post.author = request.user
-        post.save()
-        messages.success(request, "Post changed successful!")
-        return redirect("post:dashboard")
+    if post.author != request.user:
+        messages.error(request, "Bu işlem için yetkili değilsiniz!")
+        return redirect("posts:detail", slug=post.slug)
 
-    return render(request, "post_pages/update_post.html", {"form": form})
+    else:
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            messages.success(request, "Post changed successful!")
+            return redirect("posts:detail", slug=post.slug)
+        context = {
+            "post": post,
+            "form": form,
+        }
+    return render(request, "post_pages/update_post.html", context)
 
 
 @login_required
-def delete_post(request, id):
-    post = get_object_or_404(Post, id=id)
-
-    post.delete()
-
-    messages.success(request, "Post deleted successful!")
-
-    return redirect("post:dashboard")
+def delete_post(request, slug):
+    #  Silmek yerine passive yapsak daha iyi olur.
+    post = get_object_or_404(Post, slug=slug)
+    #  post.delete()
+    if post.author == request.user:
+        if post.active_post == True:
+            post.active_post = False
+        else:
+            post.active_post = True
+            post.save()
+            messages.success(request, "Post yayından kaldırıldı!")
+    else:
+        messages.error(request, "Bu işlem için yetkili değilsiniz!")
+    return redirect("posts:detail", slug=post.slug)

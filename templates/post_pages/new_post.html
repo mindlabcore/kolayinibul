@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}New Post - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+{% block body %}
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+            <div class="row">
+                <div class="col-full tab-full">
+                    <div class="heading">
+                        <h2>Write New Post</h2>
+                    </div>
+                    <hr>
+                    <form method="post" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form }}
+
+                        <button type="submit" class="btn--primary full-width">Push It!</button>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+
+{% endblock body %}
