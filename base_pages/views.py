@@ -12,10 +12,8 @@ from django.db.models import Q
 # Create your views here.
 def index(request):
     posts = Post.objects.filter(active_post=True)
-
     context = {
         "posts": posts,
-
     }
     return render(request, "index.html", context)
 
