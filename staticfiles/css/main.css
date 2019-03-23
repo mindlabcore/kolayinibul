@@ -2498,6 +2498,16 @@ body.search-is-visible {
     border-radius: 50%;
 }
 
+/**index page**/
+.entry__profile-pic img {
+    border-radius: 50%;
+    position: relative;
+    float: left;
+    height: 4.2rem;
+    width: 4.2rem;
+    margin-top: -.9rem;
+}
+
 .featured .entry__meta {
     list-style: none;
     margin: 0 0 0 6rem;
