@@ -60,7 +60,7 @@ def my_profile(request):
 def search_view(request):
     context = {}
     if request.method == "GET":
-        search_key = request.GET.get("q")
+        search_key = request.GET.get("s")
         print(search_key)
         if search_key:
             context["searching_posts"] = Post.objects.filter(active_post=True).filter(
@@ -69,3 +69,7 @@ def search_view(request):
             )
 
     return render(request, "help_pages/search.html", context)
+
+
+def job_page_coming_soon(request):
+    return render(request, "job_pages/coming_soon.html")

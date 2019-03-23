@@ -33,8 +33,32 @@
                         {{ post.description|safe }}
                     </p>
                 </div>
+                <hr>
+                <div class="caption-container">
+                    <div class="col-six table-responsive">
+                <div class="s-content__author">
+                    <img src="{{ post.author.profile.avatar.url }}" alt="">
+
+                    <div class="s-content__author-about">
+                        <h4 class="s-content__author-name">
+                            <a href="{% url 'user:profile' slug=post.author.profile.slug %}">{{ post.author }}</a>
+                        </h4>
+
+                        <p>{{ post.author.profile.bio }}
+                        </p>
+
+                        <ul class="s-content__author-social">
+                            <li><a href="#0">Facebook</a></li>
+                            <li><a href="#0">Twitter</a></li>
+                            <li><a href="#0">GooglePlus</a></li>
+                            <li><a href="#0">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+                </div></div>
+
+
         </section>
     </section>
-
 {% endblock body %}

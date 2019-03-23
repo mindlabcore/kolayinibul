@@ -1,0 +1,11 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Çok Yakında - {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    <img src="{% static 'images/cover.jpg' %}" alt="">
+    <h1>Çok yakında burada müthiş şeyler olacak!</h1>
+
+{% endblock %}

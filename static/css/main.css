@@ -3749,6 +3749,7 @@ footer h4::after {
     list-style: none;
     margin-left: 0;
     font-family: 'Comfortaa', cursive;
+    font-weight: 700;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;

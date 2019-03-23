@@ -39,6 +39,8 @@ urlpatterns = [
     path('faq/', base_pages_view.faq, name="faq"),
     path('contact_us/', base_pages_view.contact_us, name="contact_us"),
     path('search/', base_pages_view.search_view, name="search_view"),
+    path('jobs/', base_pages_view.job_page_coming_soon, name="job_page_coming_soon"),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
