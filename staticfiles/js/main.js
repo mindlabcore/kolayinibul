@@ -128,7 +128,7 @@
             e.stopPropagation();
         });
 
-        searchField.attr({placeholder: 'Type Keywords', autocomplete: 'off'});
+            searchField.attr({ autocomplete: 'off'});
 
     };
 
