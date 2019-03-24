@@ -53,6 +53,7 @@ class ResetForm(forms.Form):
         return values
 
 
+#  with e-mail
 class ChangePasswordForm(forms.Form):
     password = forms.CharField(label="Password")
     confirm = forms.CharField(max_length=20, label="Confirm Password", widget=forms.PasswordInput)

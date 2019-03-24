@@ -1,10 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Biz Kimiz? - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+
+{% block body %}
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Bizim Hakkımızda Daha Çok Şey!
+                </h1>
+            </div> <!-- end s-content__header -->
+
+            <div class="s-content__media col-full">
+                <div class="s-content__post-thumb">
+                    <!--<img src="{% static 'logo/Kolayı_varken_ (1).png' %}"
+                         srcset="images/thumbs/about/about-2000.jpg 2000w,
+                                 images/thumbs/about/about-1000.jpg 1000w,
+                                 images/thumbs/about/about-500.jpg 500w"
+                         sizes="(max-width: 2000px) 100vw, 2000px" alt="">
+                         -->
+                </div>
+            </div> <!-- end s-content__media -->
+
+            <div class="col-full s-content__main">
+
+                <p class="lead">İnternet bir uzay boşluğu. O kadar çok bilgiye sahibiz ki hiçbir şeye ulaşamıyoruz.
+                    Bilgiye ulaşmak için harcadığımız zaman ulaştığımızda elde edeceğimiz faydadan daha faydalı. İşte
+                    tam burada yardımına biz koşuyoruz. Çok aramış insanların çok arayan insanlara yaptığı bir iyilik
+                    bu. Keyfine bak!</p>
+
+                <p>
+                </p>
+
+                <div class="row block-1-2 block-tab-full">
+                    <div class="col-block">
+                        <h3 class="quarter-top-margin">Biz Kimiz?</h3>
+                        <p>Biz kimsesizlerin kimi, sessiz yığınların sesi değiliz. Biz ormanda kaybolduğunda karşına
+                            çıkan pusulayız. Biz bildikleriyle yetinmeyenleriz. Bilmenin tamamlanan değil süren bir şey
+                            olduğunu düşünenlerdeniz.</p>
+                    </div>
+
+                    <div class="col-block">
+                        <h3 class="quarter-top-margin">Misyonumuz ne?</h3>
+                        <p>
+                            Bildiklerimizi paylaşırız. Paylaşanları buluştururuz. Buluşanları kaynaştırırız. Amacımız
+                            her bireyi en doğru bilgiye en kısa yoldan ulaştırmak. Bunu yaparken bile öğretmek. Şarkı
+                            dinlemekten sıkılmayan ama şarkı yazmayı da denemedim demeyen bireyleri bir araya getirmek
+                            istiyoruz.
+                        </p>
+                    </div>
+
+                    <div class="col-block">
+                        <h3 class="quarter-top-margin">Vizyonumuz ne?</h3>
+                        <p>Toplumsal kalıplarından çıkamayan, diretmelere karşı koyamayan insanların kaçış bileti olmak,
+                            önyargıları dozerle yıkmak, doğru bilgiye herkesin ulaşabilmesini sağlamak. Elden ele
+                            yayalım lütfen!</p>
+                    </div>
+
+                    <div class="col-block">
+                        <h3 class="quarter-top-margin">Değerlerimiz neler?</h3>
+                        <p>Eşitsizliğin her türünü karşı olmak! Bilginin bile. Mesele şu ki; yorgun hayatlar
+                            yaşıyoruz. Bizlere bir nimet gibi sunulan kişiliklerimizin dışına çıkıp diğerlerinin
+                            bildiklerini deneyimlemek istiyoruz. Bu yüzden en kıymetli değerimiz bilgiyi toplumun her sınıfına kolayca ulaştırmak.</p>
+                    </div>
+
+                </div>
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+{% endblock %}
+

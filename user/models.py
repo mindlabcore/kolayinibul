@@ -20,8 +20,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=55, blank=True, null=True)
     bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    country = models.CharField(max_length=30, blank=True)
+    school = models.CharField(max_length=30, blank=True)
+    education = models.CharField(max_length=30, blank=True)
+    city = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     job = models.CharField(max_length=30, blank=True)
@@ -29,6 +30,11 @@ class Profile(models.Model):
     post = models.ManyToManyField(Post, blank=True)
     followers = models.ManyToManyField(User, blank=True, verbose_name="Followers", related_name="Followers")
     following = models.ManyToManyField(User, blank=True, verbose_name="Following", related_name="Following")
+    github_profile = models.URLField(verbose_name="Github Profile", null=True, blank=True)
+    twitter_profile = models.URLField(verbose_name="Twitter Profile", null=True, blank=True)
+    stack_overflow_profile = models.URLField(verbose_name="Stack Overflow Profile", null=True, blank=True)
+    facebook_profile = models.URLField(verbose_name="Facebook Profile", null=True, blank=True)
+    instagram_profile = models.URLField(verbose_name="Instagram Profile", null=True, blank=True)
 
     def save(self, *args, **kwargs):
         print(self.user.username)

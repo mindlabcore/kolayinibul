@@ -36,27 +36,39 @@
                 <hr>
                 <div class="caption-container">
                     <div class="col-six table-responsive">
-                <div class="s-content__author">
-                    <img src="{{ post.author.profile.avatar.url }}" alt="">
+                        <div class="s-content__author">
+                            <img src="{{ post.author.profile.avatar.url }}" alt="">
 
-                    <div class="s-content__author-about">
-                        <h4 class="s-content__author-name">
-                            <a href="{% url 'user:profile' slug=post.author.profile.slug %}">{{ post.author }}</a>
-                        </h4>
+                            <div class="s-content__author-about">
+                                <h4 class="s-content__author-name">
+                                    <a href="{% url 'user:profile' slug=post.author.profile.slug %}">{{ post.author }}</a>
+                                </h4>
 
-                        <p>{{ post.author.profile.bio }}
-                        </p>
+                                <p>{{ post.author.profile.bio }}
+                                </p>
 
-                        <ul class="s-content__author-social">
-                            <li><a href="#0">Facebook</a></li>
-                            <li><a href="#0">Twitter</a></li>
-                            <li><a href="#0">GooglePlus</a></li>
-                            <li><a href="#0">Instagram</a></li>
-                        </ul>
+                                <!--
+                                <ul class="s-content__author-social">
+                                    <li><a href="#0" target="_blank"><i class="fab fa-stack-overflow"></i></a></li>
+                                    <li><a href="#0" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#0" target="_blank"><i class="fab fa-github"></i></a></li>
+                                    <li><a href="#0" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                                -->
+                            </div>
+                        </div>
+
+                        <a href="https://www.github.com/mindlabcore" target="_blank"><img style="width: 24px" src="{% static 'icons/github.png' %}" alt=""></a>
+                        <img style="width: 24px" src="{% static 'icons/linkedin.png' %}" alt="">
+                        <img style="width: 24px" src="{% static 'icons/stack-overflow.png' %}" alt="">
+                        <img style="width: 24px" src="{% static 'icons/twitter.png' %}" alt="">
+                        <img style="width: 24px" src="{% static 'icons/instagram.png' %}" alt="">
+                        <img style="width: 24px" src="{% static 'icons/skype.png' %}" alt="">
+                        <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt="">
+
                     </div>
                 </div>
             </div>
-                </div></div>
 
 
         </section>

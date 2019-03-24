@@ -6,11 +6,13 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def sign_up(request):
     if request.user.is_authenticated:
-        messages.success(request, "You are already logged in. Are you sick?")
+        messages.warning(request, "Zaten giriş yapmıştın. Hasta mısın?")
         return redirect("index")
     else:
         form = SignupForm(request.POST or None)
@@ -27,7 +29,7 @@ def sign_up(request):
             # kullanıcıyı kayıt ettik ve doğrudan login yaptık
             newUser.save()
             login(request, newUser)
-            messages.success(request, "Congratulation! Welcome.")
+            messages.success(request, "Tebrikler! Aramıza hoşgeldin.")
             return redirect("index")
         context = {
 
@@ -38,7 +40,7 @@ def sign_up(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        messages.success(request, "You are already logged in. Are you sick?")
+        messages.notice(request, "Zaten giriş yapmıştın. Hasta mısın?")
         return redirect("index")
     else:
         print("*" * 30)
@@ -58,10 +60,10 @@ def login_user(request):
             user = authenticate(username=username, password=password)
 
             if user is None:
-                messages.info(request, "Username or Password is incorrect! Try again.")
+                messages.info(request, "Kullanıcı adı veya parola hatalı. Lütfen tekrar dene!")
                 return render(request, "login_logout_signup/login.html", context)
 
-            messages.success(request, "Login successful! Welcome honey.")
+            messages.success(request, "Giriş yaptın. Hoşgeldin! :)")
             login(request, user)
             print("l" * 30)
             go_to = request.POST.get('next', '/')
@@ -81,7 +83,7 @@ def login_user(request):
 @login_required
 def logout_user(request):
     logout(request)
-    messages.success(request, "Logout successful! Goodbye motherfucker! :)")
+    messages.success(request, "Hoşçakal! Tekrar gel olur mu? :'(")
     #  return render(request, "login_logout_signup/logout.html")
     return redirect("index")
 
@@ -147,3 +149,21 @@ def profile(request, slug):
         "profile_detail": profile_detail
     }
     return render(request, "profile_pages/profile.html", context)
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('index')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'login_logout_signup/change_password.html', {
+        'form': form
+    })

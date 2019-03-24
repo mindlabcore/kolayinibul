@@ -1,10 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}İletişim - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+
+{% block body %}
+
+    <section class="s-content s-content--narrow">
+
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+                    Bize Ulaşmaktan Çekinme
+                </h1>
+            </div> <!-- end s-content__header -->
+
+            <div class="col-full s-content__main">
+                <div class="row">
+                    <div class="col-six tab-full">
+                        <h3>Neredeyiz?</h3>
+
+                        <p>
+                            Westbahnhof, <br>
+                             BahnhofCity Wien West,<br>
+                            Europaplatz 2/1/2, 1150 <br>
+                            Vienna
+                        </p>
+
+                    </div>
+
+                    <div class="col-six tab-full">
+                        <h3>İletişim Bilgileri</h3>
+
+                        <p>contact@kolayinibul.com<br>
+                            Phone: (+1) 123 456
+                        </p>
+
+                    </div>
+                </div> <!-- end row -->
+
+                <h3>Bir sorun mu var? Hemen söyle!</h3>
+
+                <form name="cForm" id="cForm" method="post" action="">
+                    {% csrf_token %}
+                    <fieldset>
+
+                        <div class="form-field">
+                            <input name="cName" type="text" id="cName" class="full-width" placeholder="Adın"
+                                   value="">
+                        </div>
+
+                        <div class="form-field">
+                            <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="E-mail Adresin"
+                                   value="">
+                        </div>
+
+                        <div class="message form-field">
+                            <textarea name="cMessage" id="cMessage" class="full-width"
+                                      placeholder="Mesajını yaz..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit btn btn--primary full-width">Gönder</button>
+
+                    </fieldset>
+                </form> <!-- end form -->
+
+
+            </div> <!-- end s-content__main -->
+
+        </div> <!-- end row -->
+
+    </section> <!-- s-content -->
+
+
+{% endblock %}
+

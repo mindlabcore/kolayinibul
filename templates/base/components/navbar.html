@@ -16,8 +16,7 @@
                          alt="Homepage">
                 </a>
             </div> <!-- end header__logo -->
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-            >
+
             <ul class="header__social">
 
                 <li>
@@ -30,7 +29,7 @@
                     <a href="https://www.instagram.com/kolayinibul" target="_blank"><i class="fab fa-instagram"></i></a>
                 </li>
                 <li>
-                    <a href="#0" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="#0" target="_blank"><i class="fab fa-stack-overflow"></i></a>
                 </li>
                 <li>
                     <a href="" target="_blank"><i class="fab fa-github"></i></a>
@@ -101,7 +100,7 @@
                             <a href="#0" title="">{{ request.user.username }}</a>
                             <ul class="sub-menu">
                                 <li><a href="{% url 'my_profile' %}">Profil Sayfam</a></li>
-                                <li><a href="single-video.html">Şifremi Değiştir</a></li>
+                                <li><a href="{% url 'user:change_password' %}">Şifremi Değiştir</a></li>
                                 <li><a href="{% url 'user:logout' %}">Çıkış Yap</a></li>
                             </ul>
                         </li>
