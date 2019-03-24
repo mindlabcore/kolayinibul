@@ -7,6 +7,12 @@
             <div class="masonry">
                 <div class="grid-sizer"></div>
                 {% for post in posts %}
+
+                    {% if  forloop.counter == 5 %}
+                        <h1>reklam</h1>
+                        {% else %}
+                    <h2>değil</h2>
+                    {% endif %}
                     <article class="masonry__brick entry format-standard" data-aos="fade-up">
 
                         <div class="entry__thumb">

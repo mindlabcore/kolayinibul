@@ -11,7 +11,7 @@
             <h3>Popüler Post'lar</h3>
 
             <div class="block-1-2 block-m-full popular__posts">
-                {% for post in posts|slice:":6" %}
+                {% for post in footer_post|slice:":6" %}
                     <article class="col-block popular__post">
                         <a href="#0" class="popular__thumb">
                             <img src="{{ post.sub_category.sub_category_image.url }}" alt="">

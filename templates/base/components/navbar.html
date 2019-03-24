@@ -11,9 +11,14 @@
 
             <div class="header__logo">
                 <a class="logo" href="{% url "index" %}">
-                    <img style="width: 120px; height: 120px"
+                    <img class="masaustuLogo" style="width: 120px; height: 120px"
                          src="{% static 'logo/1781596764_b4fdb39e-54f8-49cd-b7db-7fe8b753a9f5 (1).png' %}"
                          alt="Homepage">
+
+                      <img class="mobileLogo" style="width: 120px; height: 50px"
+                         src="{% static 'logo/KB.png' %}"
+                         alt="Homepage">
+
                 </a>
             </div> <!-- end header__logo -->
 
@@ -43,7 +48,7 @@
 
                 <form role="search" method="get" class="header__search-form" action="{% url 'search_view' %}">
                     <label>
-                        <span class="hide-content">Ne arıyorsun?</span>
+                        <span class="hide-content">Ne arıyorsun?</span><br>
                         <input type="search" class="search-field" placeholder="Bir şeyler yaz!" value="" name="s"
                                title="Search for:" autocomplete="on" id="search_def">
                     </label>

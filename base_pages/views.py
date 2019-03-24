@@ -81,3 +81,11 @@ def categories(request):
         "categories": categories,
     }
     return context
+
+
+def footerpost(request):
+    footer_post = Post.objects.filter(active_post="2").order_by('-created_date')
+    context = {
+        "footer_post": footer_post,
+    }
+    return context

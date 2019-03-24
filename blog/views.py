@@ -92,3 +92,4 @@ def delete_post(request, slug):
     else:
         messages.error(request, "Bu işlem için yetkili değilsiniz!")
     return redirect("posts:detail", slug=post.slug)
+

@@ -133,11 +133,34 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     margin-bottom: 1.8rem;
 }
 
+.masaustuLogo {
+    display: block;
+}
+
+.mobileLogo {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
         margin-top: 5.1rem;
     }
 
+    .masaustuLogo {
+        display: none;
+    }
+
+    .mobileLogo {
+        display: block;
+    }
+
+    .tagcloud a {
+
+        font-size: 1rem !important;
+        line-height: 2.5rem !important;
+        padding: 0 1rem !important;
+        margin: 2px !important;
+    }
 }
 
 h5, .h5, h6, .h6 {
@@ -161,14 +184,14 @@ h1, .h1 {
 
 @media only screen and (max-width: 600px) {
     h1, .h1 {
-        font-size: 3.3rem;
+        font-size: 3rem !important;
         letter-spacing: -.07rem;
     }
 
 }
 
 h2, .h2 {
-    font-size: 3rem;
+    font-size: 2.5rem !important;
     line-height: 1.3;
 }
 
@@ -736,8 +759,8 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-    color: #0054a5;
-    border-bottom: 2px solid #0054a5;
+    color: #0054a5 !important;
+    border-bottom: 2px solid #0054a5 !important;
 }
 
 label, legend {
@@ -1923,7 +1946,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .header__search-form input[type="search"]::-webkit-input-placeholder {
-    color: #FFFFFF;
+    color: transparent;
     text-align: center !important;
     opacity: 1;
 }
@@ -2095,7 +2118,7 @@ body.search-is-visible {
     }
 
     .s-pageheader--home {
-        padding-top: 96px;
+        padding-top: 35px;
     }
 
     .header__logo img {
@@ -4295,3 +4318,12 @@ footer h4::after {
     position: relative;
     top: 1px;
 }
+
+
+.search-field{
+    color:white;
+    text-align: center;
+}
+input:focus::-webkit-input-placeholder { color:transparent; }
+.search-field:focus::-webkit-input-placeholder { color:transparent;
+    display: none !important; }
