@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user',
     'base_pages',
 
+
     # 3rd Apps.
     'ckeditor',
     'django_extensions',

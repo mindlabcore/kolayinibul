@@ -1772,7 +1772,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 .header__logo a {
     display: block;
-    margin: 0 0 0 6px;
+    margin: -16px 0 0 6px;
     padding: 0;
     outline: 0;
     border: none;

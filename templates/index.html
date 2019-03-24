@@ -20,23 +20,8 @@
                             </a>
                         </div>
 
-                        <div class="entry__text">
+                        <div class="entry__text" style="padding-bottom: 1rem">
                             <div class="entry__header">
-
-                                <!-- LikeBtn.com BEGIN -->
-                                <span class="likebtn-wrapper" data-lang="tr" data-i18n_like="xxx"
-                                      data-rich_snippet="true" data-identifier="item_1" data-show_like_label="false"
-                                      data-counter_clickable="true" data-loader_show="true"></span>
-                                <script>(function (d, e, s) {
-                                    if (d.getElementById("likebtn_wjs")) return;
-                                    a = d.createElement(e);
-                                    m = d.getElementsByTagName(e)[0];
-                                    a.async = 1;
-                                    a.id = "likebtn_wjs";
-                                    a.src = s;
-                                    m.parentNode.insertBefore(a, m)
-                                })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
-                                <!-- LikeBtn.com END -->
 
 
                                 <div class="entry__date" style="text-align: right">
@@ -57,6 +42,7 @@
 
 
                             <div class="entry__content">
+
                                 <a href="{% url 'index' %}" class="entry__profile-pic">
                                     <img class="avatar" src="{{ post.author.profile.avatar.url }}" alt="">
                                 </a>
@@ -65,14 +51,17 @@
                                     <a href="{% url 'user:profile' slug=post.author %}">&nbsp{{ post.author }}</a>
 
                                 </div>
-                                <br>
+                                <hr>
 
 
                                 <div class="entry__meta">
                             <span class="entry__meta-links">
                                 {% for tag in post.tag.all|slice:":3" %}
                                     <a href="{% url 'posts:categories' id=post.category_id %}">
-                                {{ tag }}
+
+
+                                   <img src="{{ tag.sub_category_image.url }}" alt="" title="{{ tag }}"
+                                         style="width: 10%">
                                 </a>
                                 {% endfor %}
                             </span>

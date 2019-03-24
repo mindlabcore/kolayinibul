@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(SubCategory)
 class SubCategoryAdmin(admin.ModelAdmin):
-    list_display = ["id", "category_name", "sub_category_image","sub_category_name"]
+    list_display = ["id", "category_name", "sub_category_image", "sub_category_name"]
     list_display_links = ["id", "category_name", "sub_category_name"]
 
     class Meta:
@@ -22,7 +22,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["id", "category", "title", "author", "created_date", "updated_date", "active_post"]
+    list_display = ["id", "category", "title", "sub_category", "author", "created_date", "updated_date", "active_post"]
 
     class Meta:
         model = Post

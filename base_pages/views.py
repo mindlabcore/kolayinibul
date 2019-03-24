@@ -11,7 +11,7 @@ from django.db.models import Q
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.filter(active_post="2")
+    posts = Post.objects.filter(active_post="2").order_by('-created_date')
     context = {
         "posts": posts,
     }

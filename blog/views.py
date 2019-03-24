@@ -17,7 +17,8 @@ def categories(request, id):
 
 
 def posts(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-created_date')
+
     context = {
         "posts": posts,
     }

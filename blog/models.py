@@ -29,7 +29,7 @@ class Post(models.Model):
     category = models.ForeignKey("Category", on_delete=models.CASCADE, verbose_name="Category Name")
     sub_category = models.ForeignKey("SubCategory", on_delete=models.CASCADE, verbose_name="Sub-Category Name",
                                      related_name="sub_category")
-    title = models.CharField(max_length=50, verbose_name="Story Title")
+    title = models.CharField(max_length=50, verbose_name="Post Title")
     slug = models.SlugField(max_length=55, blank=True, null=True)
     description = RichTextField(max_length=100000, null=False)
     image = models.ImageField(upload_to='story_images/', null=True, blank=True,

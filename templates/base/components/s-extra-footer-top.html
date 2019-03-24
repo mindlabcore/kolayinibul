@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load my_filters %}
 
 <!-- s-extra
 ================================================== -->
@@ -11,77 +11,24 @@
             <h3>Popüler Post'lar</h3>
 
             <div class="block-1-2 block-m-full popular__posts">
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/wheel-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">Visiting Theme Parks Improves Your Health.</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-19">Dec 19, 2017</time></span>
-                    </section>
-                </article>
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/shutterbug-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">Key Benefits Of Family Photography.</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-18">Dec 18, 2017</time></span>
-                    </section>
-                </article>
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/cookies-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">Absolutely No Sugar Oatmeal Cookies.</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-16">Dec 16, 2017</time></span>
-                    </section>
-                </article>
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/beetle-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">Throwback To The Good Old Days.</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-16">Dec 16, 2017</time></span>
-                    </section>
-                </article>
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/tulips-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">10 Interesting Facts About Caffeine.</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-14">Dec 14, 2017</time></span>
-                    </section>
-                </article>
-                <article class="col-block popular__post">
-                    <a href="#0" class="popular__thumb">
-                        <img src="images/thumbs/small/salad-150.jpg" alt="">
-                    </a>
-                    <h5><a href="#0">Healthy Mediterranean Salad Recipes</a></h5>
-                    <section class="popular__meta">
-                        <span class="popular__author"><span>By</span> <a href="#0"> John Doe</a></span>
-                        <span class="popular__date"><span>on</span> <time
-                                datetime="2017-12-12">Dec 12, 2017</time></span>
-                    </section>
-                </article>
+                {% for post in posts|slice:":6" %}
+                    <article class="col-block popular__post">
+                        <a href="#0" class="popular__thumb">
+                            <img src="{{ post.sub_category.sub_category_image.url }}" alt="">
+                        </a>
+                        <h5><a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title|safe|upfirstletter }}</a></h5>
+                        <section class="popular__meta">
+                            <span class="popular__author"><span>By</span> <a href="{% url 'user:profile' slug=post.author %}">{{ post.author }}</a></span>
+                            <span class="popular__date"><span>on</span> <time
+                                    datetime="2017-12-19">{{ post.created_date }}</time></span>
+                        </section>
+                    </article>
+                {% endfor %}
             </div> <!-- end popular_posts -->
         </div> <!-- end popular -->
 
         <div class="col-four md-six tab-full about">
-            <h3>HAKKIMIZDA</h3>
+            <h3>Biz Kimiz?</h3>
 
             <p>
                 İnternet bir uzay boşluğu. O kadar çok bilgiye sahibiz ki hiçbir şeye ulaşamıyoruz. Bilgiye ulaşmak için
