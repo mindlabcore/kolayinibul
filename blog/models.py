@@ -48,7 +48,19 @@ class Post(models.Model):
         (STATUS_ARCHIVED, 'Arşivlendi'),
         (STATUS_DEACTIVATED, 'Kaldırıldı')
     )
-    active_post = models.SmallIntegerField(choices=STATUSES, default="2")
+    active_post = models.SmallIntegerField(choices=STATUSES)
+    #  Page Header Content'de bir büyük iki küçük box'ta görünmesi için üç değer verelim.
+    LOCATION_BIG = 1
+    LOCATION_SMALL1 = 2
+    LOCATION_SMALL2 = 3
+    LOCATION_OTHER = 4
+    LOCATION = (
+        (LOCATION_BIG, 'Big Box'),
+        (LOCATION_SMALL1, 'First Small Box'),
+        (LOCATION_SMALL2, 'Second Small Box'),
+        (LOCATION_OTHER, 'Other'),
+    )
+    page_header_content = models.SmallIntegerField(choices=LOCATION)
     tag = models.ManyToManyField(SubCategory)
 
     def save(self, *args, **kwargs):

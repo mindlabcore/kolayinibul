@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'user',
     'base_pages',
 
-
     # 3rd Apps.
     'ckeditor',
     'django_extensions',
@@ -75,7 +74,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'base_pages.views.categories',
-                'base_pages.views.footerpost'
+                'base_pages.views.footerpost',
+                'base_pages.views.big_box',
+                'base_pages.views.second_box',
+                'base_pages.views.third_box',
 
             ],
         },

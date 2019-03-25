@@ -83,13 +83,16 @@ def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     #  post.delete()
     if post.author == request.user:
-        if post.active_post == "2":
-            post.active_post = "4"
-        else:
-            post.active_post = "2"
+        if post.active_post == 2:
+            post.active_post = 4
             post.save()
             messages.success(request, "Post yayından kaldırıldı!")
+        else:
+            post.active_post = 2
+            post.save()
+            messages.success(request, "Post yayına alındı!")
     else:
         messages.error(request, "Bu işlem için yetkili değilsiniz!")
-    return redirect("posts:detail", slug=post.slug)
+        return redirect("posts:detail", slug=post.slug)
+    return redirect("my_profile")
 

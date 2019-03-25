@@ -11,7 +11,7 @@ from django.db.models import Q
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.filter(active_post="2").order_by('-created_date')
+    posts = Post.objects.filter(active_post="2").order_by('-created_date').filter(page_header_content=4)
     context = {
         "posts": posts,
     }
@@ -87,5 +87,29 @@ def footerpost(request):
     footer_post = Post.objects.filter(active_post="2").order_by('-created_date')
     context = {
         "footer_post": footer_post,
+    }
+    return context
+
+
+def big_box(request):
+    big_box = get_object_or_404(Post, page_header_content=1)
+    context = {
+        "big_box": big_box,
+    }
+    return context
+
+
+def second_box(request):
+    second_box = get_object_or_404(Post, page_header_content=2)
+    context = {
+        "second_box": second_box,
+    }
+    return context
+
+
+def third_box(request):
+    third_box = get_object_or_404(Post, page_header_content=3)
+    context = {
+        "third_box": third_box,
     }
     return context

@@ -36,12 +36,24 @@
                                     <td>{{ post.category }}</td>
                                     <td>{{ post.sub_category }}</td>
                                     <td>{{ post.created_date }}</td>
-                                    <td>{{ post.active_post }}</td>
+                                    {% if post.active_post == 2 %}
+                                        <td>Aktif</td>
+                                    {% else %}
+                                        <td>Arşivlenmiş</td>
+                                    {% endif %}
+
                                     <td>17763</td>
                                     <td>4543</td>
                                     <td><a href="{% url 'posts:update' slug=post.slug %}"
                                            class="btn btn-info">Düzenle</a></td>
-                                    <td><a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-info">Yayından Kaldır</a>
+                                    {% if post.active_post == 2 %}
+                                        <td><a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-info">Yayından
+                                            Kaldır</a>
+                                            {% else %}
+                                        <td>
+                                        <a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-info">Yayına
+                                            Al</a>
+                                    {% endif %}
                                     </td>
 
                                 </tr>

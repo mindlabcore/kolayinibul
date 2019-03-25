@@ -28,7 +28,7 @@
 
 
                                 <div class="entry__date" style="text-align: right">
-                                    <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.created_date }}</a>
+                                    <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.created_date|date:"F d, Y" }}</a>
 
                                 </div>
                                 <h1 class="entry__title"><a
