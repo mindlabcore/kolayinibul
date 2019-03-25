@@ -15,7 +15,7 @@
                          src="{% static 'logo/1781596764_b4fdb39e-54f8-49cd-b7db-7fe8b753a9f5 (1).png' %}"
                          alt="Homepage">
 
-                      <img class="mobileLogo" style="width: 120px; height: 50px"
+                    <img class="mobileLogo" style="width: 120px; height: 50px"
                          src="{% static 'logo/MobileLogo2.png' %}"
                          alt="Homepage">
 
@@ -89,17 +89,10 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li class="has-children">
-                        <a href="#0" title="">Yazarlar</a>
-                        <ul class="sub-menu">
-                            <li><a href="single-video.html">Video Post</a></li>
-                            <li><a href="single-audio.html">Audio Post</a></li>
-                            <li><a href="single-gallery.html">Gallery Post</a></li>
-                            <li><a href="single-standard.html">Standard Post</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html" title="">Popüler Yazılar</a></li>
                     <li><a href="{% url 'job_page_coming_soon' %}" title="">İş İlanları</a></li>
+                    <li><a href="{% url 'about_us' %}" title="">Biz Kimiz?</a></li>
+                    <li><a href="{% url 'contact_us' %}" title="">İletişim</a></li>
+
                     {% if request.user.is_authenticated %}
                         <li class="has-children">
                             <a href="#0" title="">{{ request.user.username }}</a>
@@ -116,11 +109,11 @@
 
 
                     {% endif %}
-            <li>
-                            <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını
-                                Yaz</a>
-                        </li>
-</ul>
+                    <li>
+                        <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını
+                            Yaz</a>
+                    </li>
+                </ul>
                 <!-- end header__nav -->
 
                 <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

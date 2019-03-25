@@ -2913,7 +2913,7 @@ html.no-csstransitions .featured {
  * ------------------------------------------------------------------- */
 .s-content {
     background-color: #f2f2f2;
-    padding-top: 8.4rem;
+    padding-top: 0rem;
     padding-bottom: 7.2rem;
 }
 
@@ -2965,7 +2965,7 @@ html.no-csstransitions .featured {
 
 @media only screen and (max-width: 800px) {
     .s-content {
-        padding-top: 6rem;
+        padding-top: 0rem;
     }
 
     .s-content__header h1 {
