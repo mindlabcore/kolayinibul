@@ -13,30 +13,26 @@ class SignupForm(forms.Form):
     password = forms.CharField(max_length=20, label="Password", widget=forms.PasswordInput)
     confirm = forms.CharField(max_length=20, label="Confirm Password", widget=forms.PasswordInput)
     email = forms.EmailField()
-    date_of_birth = forms.DateField(initial=datetime.date.today)
-
-    def clean_date_of_birth(self):
-        dob = self.cleaned_data['date_of_birth']
-        today = date.today()
-        if (dob.year + 18, dob.month, dob.day) > (today.year, today.month, today.day):
-            raise forms.ValidationError('Must be at least 18 years old to register. Please leave this site.')
-        return dob
+    first_name = forms.CharField(max_length=30, label="İsim")
+    last_name = forms.CharField(max_length=150, label="Soyisim")
 
     def clean(self):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
         confirm = self.cleaned_data.get("confirm")
         email = self.cleaned_data.get("email")
-        date_of_birth = self.cleaned_data.get("date_of_birth")
+        first_name = self.cleaned_data.get("first_name")
+        last_name = self.cleaned_data.get("last_name")
 
         if password and confirm and password != confirm:
-            raise forms.ValidationError("Passwords are not correct! Please try again.")
+            raise forms.ValidationError("Parolalar birbiriyle uyuşmuyor!")
 
         values = {
             "username": username,
             "password": password,
             "email": email,
-            "date_of_birth": date_of_birth,
+            "first_name": first_name,
+            "last_name": last_name,
 
         }
         return values

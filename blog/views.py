@@ -6,12 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 
-def categories(request, id):
+def sub_categories(request, slug):
     # categories = get_object_or_404(Product,id = id)
-    posts = Post.objects.filter(active_post="2").filter(category=id)
+    posts = Post.objects.filter(active_post="2").filter(sub_category__slug=slug)
+
     context = {
         "posts": posts,
-
     }
     return render(request, "category_pages/categories_detail.html", context)
 

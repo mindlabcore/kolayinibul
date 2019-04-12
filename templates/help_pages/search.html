@@ -1,8 +1,8 @@
 {% extends "base/layout.html" %}
 {% load static %}
+{% block title %}Arama - {{ block.super }}{% endblock %}
+
 {% block body %}
-
-
 
     <section class="s-content">
 
@@ -23,20 +23,7 @@
                         <div class="entry__text">
                             <div class="entry__header">
 
-                                <!-- LikeBtn.com BEGIN -->
-                                <span class="likebtn-wrapper" data-lang="tr" data-i18n_like="xxx"
-                                      data-rich_snippet="true" data-identifier="item_1" data-show_like_label="false"
-                                      data-counter_clickable="true" data-loader_show="true"></span>
-                                <script>(function (d, e, s) {
-                                    if (d.getElementById("likebtn_wjs")) return;
-                                    a = d.createElement(e);
-                                    m = d.getElementsByTagName(e)[0];
-                                    a.async = 1;
-                                    a.id = "likebtn_wjs";
-                                    a.src = s;
-                                    m.parentNode.insertBefore(a, m)
-                                })(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
-                                <!-- LikeBtn.com END -->
+
 
 
                                 <div class="entry__date" style="text-align: right">
@@ -71,7 +58,7 @@
                                 <div class="entry__meta">
                             <span class="entry__meta-links">
                                 {% for tag in post.tag.all|slice:":3" %}
-                                    <a href="{% url 'posts:categories' id=post.category_id %}">
+                                    <a href="{% url 'posts:categories' slug=post.category.slug %}">
                                 {{ tag }}
                                 </a>
                                 {% endfor %}
@@ -87,23 +74,7 @@
             </div> <!-- end masonry -->
         </div> <!-- end masonry-wrap -->
 
-        <div class="row">
-            <div class="col-full">
-                <nav class="pgn">
-                    <ul>
-                        <li><a class="pgn__prev" href="#0">Prev</a></li>
-                        <li><a class="pgn__num" href="#0">1</a></li>
-                        <li><span class="pgn__num current">2</span></li>
-                        <li><a class="pgn__num" href="#0">3</a></li>
-                        <li><a class="pgn__num" href="#0">4</a></li>
-                        <li><a class="pgn__num" href="#0">5</a></li>
-                        <li><span class="pgn__num dots">…</span></li>
-                        <li><a class="pgn__num" href="#0">8</a></li>
-                        <li><a class="pgn__next" href="#0">Next</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+
 
     </section> <!-- s-content -->
 

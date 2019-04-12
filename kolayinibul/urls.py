@@ -30,6 +30,7 @@ urlpatterns = [
 
     # blog App:
     path('posts/', include("blog.urls", namespace="posts")),
+    path('categories/', include("blog.urls", namespace="categories")),
 
     # base_pages App:
     path('', base_pages_view.index, name="index"),

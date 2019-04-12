@@ -9,6 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from blog.models import Post, Category, SubCategory
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import ugettext_lazy as _
 
 
 class UsersPosts(models.Model):
@@ -19,12 +20,14 @@ class UsersPosts(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=55, blank=True, null=True)
+    first_name = models.CharField(_('first name'), max_length=30, null=True, blank=True)
+    last_name = models.CharField(_('last name'), max_length=30, null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     school = models.CharField(max_length=30, blank=True)
     education = models.CharField(max_length=30, blank=True)
     city = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', default='avatars/defaultuser.jpg')
     job = models.CharField(max_length=30, blank=True)
     skills = models.ManyToManyField(SubCategory)
     post = models.ManyToManyField(Post, blank=True)
@@ -51,6 +54,10 @@ class Profile(models.Model):
     def get_slug(self):
         slug = self.user.username.replace("ı", "i")
         return slugify(slug)
+
+    def get_full_name(self):
+        """ Short cut method that duplicates user.get_full_name """
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 @receiver(post_save, sender=User)

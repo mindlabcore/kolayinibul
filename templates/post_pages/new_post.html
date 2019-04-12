@@ -1,7 +1,7 @@
 {% extends "base/layout.html" %}
 {% load static %}
 {% include 'base/components/scripts.html' %}
-{% block title %}New Post - {{ block.super }}{% endblock %}
+{% block title %}Yeni Post - {{ block.super }}{% endblock %}
 
 {% block body %}
     <section class="s-content" style="padding-top: 0px">
@@ -9,18 +9,17 @@
             <div class="row">
                 <div class="col-full tab-full">
                     <div class="heading">
-                        <h2>Write New Post</h2>
+                        <h2>Yeni Post Yaz</h2>
                     </div>
                     <hr>
-                    <form method="post" enctype="multipart/form-data">
 
+                    <form method="post" novalidate>
                         {% csrf_token %}
                         {{ form.media }}
                         {{ form }}
-
-                        <button type="submit" class="btn--primary full-width">Push It!</button>
-                        <hr>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+
                 </div>
             </div>
 

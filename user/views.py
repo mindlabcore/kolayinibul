@@ -20,12 +20,12 @@ def sign_up(request):
             username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-            date_of_birth = form.cleaned_data.get("date_of_birth")
+            first_name = form.cleaned_data.get("first_name")
+            last_name = form.cleaned_data.get("last_name")
 
-            newUser = User(username=username)
+            newUser = User(username=username, email=email, first_name=first_name, last_name=last_name)
             newUser.set_password(password)
-            newUser = User(email=email)
-            newUser = User(date_of_birth=date_of_birth)
+
             # kullanıcıyı kayıt ettik ve doğrudan login yaptık
             newUser.save()
             login(request, newUser)

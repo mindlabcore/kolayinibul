@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import Http404
 
 
 # Create your views here.
@@ -64,7 +65,8 @@ def search_view(request):
         print(search_key)
         if search_key:
             context["searching_posts"] = Post.objects.filter(active_post="2").filter(
-                Q(title__icontains=search_key) | Q(description__icontains=search_key)
+                Q(title__icontains=search_key) | Q(description__icontains=search_key) |
+                Q(author__profile__slug__icontains=search_key) | Q(tag__sub_category__slug__icontains=search_key)
 
             )
 
@@ -92,7 +94,10 @@ def footerpost(request):
 
 
 def big_box(request):
-    big_box = get_object_or_404(Post, page_header_content=1)
+    try:
+        big_box = get_object_or_404(Post, page_header_content=1)
+    except Post.DoesNotExist:
+        raise Http404("No MyModel matches the given query.")
     context = {
         "big_box": big_box,
     }
@@ -101,6 +106,7 @@ def big_box(request):
 
 def second_box(request):
     second_box = get_object_or_404(Post, page_header_content=2)
+
     context = {
         "second_box": second_box,
     }
@@ -113,3 +119,6 @@ def third_box(request):
         "third_box": third_box,
     }
     return context
+
+
+
