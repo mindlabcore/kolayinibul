@@ -34,18 +34,34 @@
                     </p>
                 </div>
                 <hr>
-                <div class="caption-container">
-                    <div class="col-six table-responsive">
-                        <div class="s-content__author">
-                            <img src="{{ post.author.profile.avatar.url }}" alt="">
+                {% if post.sources %}
+                    <h3>Kaynaklar:</h3>
+                    <a href="{{ post.sources }}">{{ post.sources }}</a>
+                    <br>
+                    <hr>
+                {% else %}
 
+                {% endif %}
+
+                <!-- Author Details -->
+                <div class="caption-container">
+                    <div class="col-six table-responsive" style="border: #EFC702 dashed 2px">
+                        <div class="s-content__author" style="padding-top: -5px">
+                            <img src="{{ post.author.profile.avatar.url }}" alt="" style="padding-top: 1px">
+                            <br>
                             <div class="s-content__author-about">
                                 <h4 class="s-content__author-name">
                                     <a href="{% url 'user:profile' slug=post.author.profile.slug %}">{{ post.author }}</a>
                                 </h4>
+                                {% if post.author.profile.bio %}
 
-                                <p>{{ post.author.profile.bio }}
-                                </p>
+                                    <p>{{ post.author.profile.bio }}
+                                    </p>
+
+                                {% else %}
+
+                                {% endif %}
+                                <hr>
 
                                 <!--
                                 <ul class="s-content__author-social">
@@ -57,19 +73,54 @@
                                 -->
                             </div>
                         </div>
+                        <div class="text-center">
+                            {% if post.author.profile.github_profile %}
+                                <a href="{{ post.author.profile.github_profile }}" target="_blank"><img
+                                        style="width: 24px"
+                                        src="{% static 'icons/github.png' %}"
+                                        alt=""></a>
+                            {% else %}
+                            {% endif %}
+                            {% if post.author.profile.linkedin_profile %}
+                                <a href="{{ post.author.profile.linkedin_profile }}" target="_blank">
+                                    <img style="width: 24px" src="{% static 'icons/linkedin.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
 
-                        <a href="https://www.github.com/mindlabcore" target="_blank"><img style="width: 24px" src="{% static 'icons/github.png' %}" alt=""></a>
-                        <img style="width: 24px" src="{% static 'icons/linkedin.png' %}" alt="">
-                        <img style="width: 24px" src="{% static 'icons/stack-overflow.png' %}" alt="">
-                        <img style="width: 24px" src="{% static 'icons/twitter.png' %}" alt="">
-                        <img style="width: 24px" src="{% static 'icons/instagram.png' %}" alt="">
-                        <img style="width: 24px" src="{% static 'icons/skype.png' %}" alt="">
-                        <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt="">
+                            {% if post.author.profile.stack_overflow_profile %}
+                                <a href="{{ post.author.profile.stack_overflow_profile }}" target="_blank">
+                                    <img style="width: 24px" src="{% static 'icons/stack-overflow.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
 
+                            {% if post.author.profile.twitter_profile %}
+                                <a href="{{ post.author.profile.twitter_profile }}" target="_blank">
+                                    <img style="width: 24px" src="{% static 'icons/twitter.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+
+                            {% if post.author.profile.instagram_profile %}
+                                <a href="{{ post.author.profile.instagram_profile }}" target="_blank">
+                                    <img style="width: 24px" src="{% static 'icons/instagram.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+
+                            {% if post.author.profile.skype_profile %}
+                                <a href="{{ post.author.profile.skype_profile }}" target="_blank">
+                                    <img style="width: 24px" src="{% static 'icons/skype.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+
+                            {% if post.author.profile.spotify_profile %}
+                                <a href="{{ post.author.profile.spotify_profile }}" target="_blank">
+                                <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <!-- Author Details end-->
 
         </section>
     </section>

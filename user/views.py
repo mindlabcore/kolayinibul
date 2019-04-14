@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
-from .forms import LoginForm, SignupForm, ResetForm, ChangePasswordForm
+from .forms import LoginForm, SignupForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.core.mail import send_mail, EmailMessage, BadHeaderError
+from django.template.loader import render_to_string
 
 
 def sign_up(request):
@@ -88,46 +90,6 @@ def logout_user(request):
     return redirect("index")
 
 
-def send_reset_link(request):
-    form = ResetForm(request.POST or None)
-    context = {
-        "form": form
-    }
-
-    if form.is_valid():
-        email = form.cleaned_data.get("email")
-
-        if email is None:
-            messages.info(request, "This e-mail is not registered! Try again.")
-            return render(request, "login_logout_signup/reset_password.html", context)
-
-        messages.success(request, "We sent link to your email for reset your password.")
-        return redirect("index")
-
-    return render(request, "login_logout_signup/reset_password.html", context)
-
-
-def create_new_password(request):
-    form = ChangePasswordForm(request.POST or None)
-    context = {
-        "form": form
-    }
-
-    if form.is_valid():
-        username = form.cleaned_data.get("username")
-        email = form.cleaned_data.get("email")
-        user = authenticate(username=username)
-
-        if user is None:
-            messages.info(request, "Username is incorrect! Try again.")
-            return render(request, "login_logout_signup/create_new_password.html", context)
-
-        messages.success(request, "We sent link to your email for reset your password.")
-        return redirect("index")
-
-    return render(request, "login_logout_signup/create_new_password.html", context)
-
-
 @login_required
 def upload_pic(request):
     if request.method == 'POST':
@@ -158,12 +120,34 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
+            messages.success(request, 'Parolanız başarıyla değiştirildi!')
             return redirect('index')
         else:
-            messages.error(request, 'Please correct the error below.')
+            messages.error(request, 'Lütfen hataları düzeltin.')
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'login_logout_signup/change_password.html', {
         'form': form
     })
+
+
+def contact_us(request):
+    form = ContactUsForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        cName = form.cleaned_data.get("cName")
+        cEmail = form.cleaned_data.get("cEmail")
+        cMessage = form.cleaned_data.get("cMessage")
+
+        body = context
+        sending = EmailMessage('Parola Sıfırlama', body, to=["iletisim@kolayinibul.com"])
+        sending.send()
+        messages.success(request, "Mesajınızı aldık, teşekkür ederiz!")
+        return redirect("index")
+    messages.warning((request,))
+    return render(request, "help_pages/contact_us.html", context)
+
+
+

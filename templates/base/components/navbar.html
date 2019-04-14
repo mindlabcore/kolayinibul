@@ -70,13 +70,14 @@
                         <a href="#0" title="">Kategoriler</a>
                         <ul class="sub-menu">
                             {% for category in categories %}
-                                <li><a class="" href="#">{{ category.category_name }}</a>
+                                <li><a class=""
+                                       href="{% url 'categories' slug=category.slug %}">{{ category.category_name }}</a>
 
 
                                     <ul class="sub-menu">
 
                                         {% for sub_category in category.subcategories.all %}
-                                            <a class="" href="{% url 'categories:categories' slug=sub_category.slug %}">
+                                            <a class="" href="{% url 'categories:subcategories' slug=sub_category.slug %}">
                                                 {{ sub_category }}
                                             </a>
                                         {% endfor %}
@@ -96,7 +97,7 @@
                         <li class="has-children">
                             <a href="#0" title="">{{ request.user.username }}</a>
                             <ul class="sub-menu">
-                                <li><a href="{% url 'my_profile' %}">Profil Sayfam</a></li>
+                                <li><a href="{% url 'my_profile' %}">Yazılarım</a></li>
                                 <li><a href="{% url 'user:change_password' %}">Şifremi Değiştir</a></li>
                                 <li><a href="{% url 'user:logout' %}">Çıkış Yap</a></li>
                             </ul>
@@ -109,7 +110,8 @@
 
                     {% endif %}
                     <li>
-                        <a href="{% url 'posts:add_post' %}" class="writeButton" style="color:#000000">Kolayını
+                        <a href="{% url 'posts:add_post' %}" class="writeButton"
+                           style="color:#000000; text-align: center">Kolayını
                             Yaz</a>
                     </li>
                 </ul>

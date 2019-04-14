@@ -7,11 +7,19 @@ from django.utils import timezone
 
 
 def sub_categories(request, slug):
-    # categories = get_object_or_404(Product,id = id)
-    posts = Post.objects.filter(active_post="2").filter(sub_category__slug=slug)
+    subcategory_list = Post.objects.filter(active_post="2").filter(sub_category__slug=slug)
 
     context = {
-        "posts": posts,
+        "subcategory_list": subcategory_list,
+    }
+    return render(request, "category_pages/subcategories_detail.html", context)
+
+
+def categories(request, slug):
+    category_list = Post.objects.filter(active_post="2").filter(category__slug=slug)
+
+    context = {
+        "category_list": category_list,
     }
     return render(request, "category_pages/categories_detail.html", context)
 
@@ -44,9 +52,11 @@ def add_post(request):
     form = PostForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
-        story = form.save(commit=False)
-        story.author = request.user
-        story.save()
+        post = form.save(commit=False)
+        post.author = request.user
+        post.save()
+        form.save_m2m()
+
         messages.success(request, "Post başarıyla oluşturuldu!")
         return redirect("my_profile")
 
@@ -68,6 +78,8 @@ def update_post(request, slug):
             post.author = request.user
             post.updated_date = timezone.now()
             post.save()
+            form.save_m2m()
+
             messages.success(request, "Post changed successful!")
             return redirect("posts:detail", slug=post.slug)
         context = {

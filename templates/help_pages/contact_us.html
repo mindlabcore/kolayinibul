@@ -7,9 +7,9 @@
 {% block body %}
 
     <section class="s-content s-content--narrow">
-        <br>        <br>
+        <br> <br>
 
-        <div class="row">
+        <div class="row" style="border: #EFC702 dashed 2px;padding: 12px">
 
             <div class="s-content__header col-full">
                 <h1 class="s-content__header-title">
@@ -24,7 +24,7 @@
 
                         <p>
                             Westbahnhof, <br>
-                             BahnhofCity Wien West,<br>
+                            BahnhofCity Wien West,<br>
                             Europaplatz 2/1/2, 1150 <br>
                             Vienna
                         </p>
@@ -34,39 +34,22 @@
                     <div class="col-six tab-full">
                         <h3>İletişim Bilgileri</h3>
 
-                        <p>contact@kolayinibul.com<br>
+                        <p>iletisim@kolayinibul.com<br>
 
                         </p>
 
                     </div>
                 </div> <!-- end row -->
+                <hr>
+                <h2>Bir sorun mu var? Hemen söyle!</h2>
 
-                <!--
-                <h3>Bir sorun mu var? Hemen söyle!</h3>
-
-                <form name="cForm" id="cForm" method="post" action="">
+                <form method="post">
                     {% csrf_token %}
-                    <fieldset>
-
-                        <div class="form-field">
-                            <input name="cName" type="text" id="cName" class="full-width" placeholder="Adın"
-                                   value="">
-                        </div>
-
-                        <div class="form-field">
-                            <input name="cEmail" type="text" id="cEmail" class="full-width" placeholder="E-mail Adresin"
-                                   value="">
-                        </div>
-
-                        <div class="message form-field">
-                            <textarea name="cMessage" id="cMessage" class="full-width"
-                                      placeholder="Mesajını yaz..."></textarea>
-                        </div>
-
-                        <button type="submit" class="submit btn btn--primary full-width">Gönder</button>
-
-                    </fieldset>
-                </form>--> <!-- end form -->
+                    {{ form.as_p }}
+                    <div class="form-actions" style="text-align: center">
+                        <button type="submit">Gönder</button>
+                    </div>
+                </form>
 
 
             </div> <!-- end s-content__main -->

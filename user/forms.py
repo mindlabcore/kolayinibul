@@ -38,17 +38,6 @@ class SignupForm(forms.Form):
         return values
 
 
-class ResetForm(forms.Form):
-    email = forms.CharField(label="Email")
-
-    def clean(self):
-        email = self.cleaned_data.get("email")
-        values = {
-            "email": email
-        }
-        return values
-
-
 #  with e-mail
 class ChangePasswordForm(forms.Form):
     password = forms.CharField(label="Password")

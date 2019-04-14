@@ -38,6 +38,9 @@ class Profile(models.Model):
     stack_overflow_profile = models.URLField(verbose_name="Stack Overflow Profile", null=True, blank=True)
     facebook_profile = models.URLField(verbose_name="Facebook Profile", null=True, blank=True)
     instagram_profile = models.URLField(verbose_name="Instagram Profile", null=True, blank=True)
+    linkedin_profile = models.URLField(verbose_name="Linkedin Profile", null=True, blank=True)
+    skype_profile = models.URLField(verbose_name="Skype Profile", null=True, blank=True)
+    spotify_profile = models.URLField(verbose_name="Spotify Profile", null=True, blank=True)
 
     def save(self, *args, **kwargs):
         print(self.user.username)

@@ -8,6 +8,9 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import Http404
+from django.core.mail import send_mail, EmailMessage, BadHeaderError
+from django.template.loader import render_to_string
+from .forms import ContactForm
 
 
 # Create your views here.
@@ -25,10 +28,6 @@ def about(request):
 
 def faq(request):
     return render(request, "help_pages/faq.html")
-
-
-def contact_us(request):
-    return render(request, "help_pages/contact_us.html")
 
 
 @login_required
@@ -95,9 +94,10 @@ def footerpost(request):
 
 def big_box(request):
     try:
-        big_box = get_object_or_404(Post, page_header_content=1)
+        big_box = Post.objects.get(page_header_content=1)
+
     except Post.DoesNotExist:
-        raise Http404("No MyModel matches the given query.")
+        big_box = None
     context = {
         "big_box": big_box,
     }
@@ -105,8 +105,11 @@ def big_box(request):
 
 
 def second_box(request):
-    second_box = get_object_or_404(Post, page_header_content=2)
+    try:
+        second_box = Post.objects.get(page_header_content=2)
 
+    except Post.DoesNotExist:
+        second_box = None
     context = {
         "second_box": second_box,
     }
@@ -114,11 +117,38 @@ def second_box(request):
 
 
 def third_box(request):
-    third_box = get_object_or_404(Post, page_header_content=3)
+    try:
+        third_box = Post.objects.get(page_header_content=3)
+
+    except Post.DoesNotExist:
+        third_box = None
     context = {
         "third_box": third_box,
     }
     return context
 
 
+def contact_us(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message'] + " Gönderen:" + from_email
+            try:
+                send_mail(subject, message, 'iletisim@kolayinibul.com', ['iletisim@kolayinibul.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(request, "Bizimle iletişime geçtiğiniz için teşekkür ederiz!")
+            return redirect('index')
+    return render(request, "help_pages/contact_us.html", {'form': form})
 
+
+def handler404(request):
+    return render(request, 'help_pages/404.html', status=404)
+
+
+def handler500(request):
+    return render(request, 'help_pages/500.html', status=500)

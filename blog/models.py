@@ -65,6 +65,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
     updated_date = models.DateTimeField(blank=True, null=True, verbose_name="Updated Date")
     verified_date = models.DateTimeField(auto_now_add=True, verbose_name="Verified Date")
+    sources = models.CharField(max_length=250, verbose_name="Kaynak", blank=True, null=True)
 
     STATUS_DRAFT = 1
     STATUS_PUBLISHED = 2
@@ -90,8 +91,8 @@ class Post(models.Model):
         (LOCATION_SMALL2, 'Second Small Box'),
         (LOCATION_OTHER, 'Other'),
     )
-    page_header_content = models.SmallIntegerField(choices=LOCATION)
-    tag = models.ManyToManyField(SubCategory)
+    page_header_content = models.SmallIntegerField(choices=LOCATION, default=4)
+    tag = models.ManyToManyField(SubCategory, default=sub_category)
 
     def save(self, *args, **kwargs):
         print(self.title)

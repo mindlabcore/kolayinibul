@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from blog import views as post_views
 from base_pages import views as base_pages_view
+from blog import views as blog_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,10 +28,13 @@ urlpatterns = [
     # user App:
     path('user/', include("user.urls", namespace="user")),
     path('accounts/login', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include('django.contrib.auth.urls')),
 
     # blog App:
     path('posts/', include("blog.urls", namespace="posts")),
     path('categories/', include("blog.urls", namespace="categories")),
+    path('categories/<slug:slug>', blog_views.categories, name="categories"),
 
     # base_pages App:
     path('', base_pages_view.index, name="index"),

@@ -20,7 +20,7 @@
                         <section class="popular__meta">
                             <span class="popular__author"><span>By</span> <a href="{% url 'user:profile' slug=post.author %}">{{ post.author }}</a></span>
                             <span class="popular__date"><span>on</span> <time
-                                    datetime="2017-12-19">{{ post.created_date }}</time></span>
+                                    datetime="2017-12-19">{{ post.created_date|date:"F d, Y" }}</time></span>
                         </section>
                     </article>
                 {% endfor %}

@@ -1,7 +1,7 @@
 {% extends "base/layout.html" %}
 {% load static %}
 {% include 'base/components/scripts.html' %}
-{% block title %}Kategoriler - {{ block.super }}{% endblock %}
+{% block title %}Alt Kategoriler - {{ block.super }}{% endblock %}
 
 {% block body %}
 
@@ -10,8 +10,8 @@
         <div class="row masonry-wrap">
             <div class="masonry">
                 <div class="grid-sizer"></div>
-                {% if category_list %}
-                    {% for post in category_list %}
+                {% if subcategory_list %}
+                    {% for post in subcategory_list %}
                         <article class="masonry__brick entry format-standard" data-aos="fade-up">
 
                             <div class="entry__thumb">
