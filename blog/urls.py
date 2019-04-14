@@ -19,5 +19,4 @@ urlpatterns = [
     path('delete/<slug:slug>', views.delete_post, name="delete"),
 
 ]
-handler404 = 'base_pages_views.handler404',
-handler500 = 'base_pages_views.handler500'
+
