@@ -60,7 +60,7 @@
                                 <div class="entry__meta">
                             <span class="entry__meta-links">
                                 {% for tag in post.tag.all|slice:":3" %}
-                                    <a href="{% url 'categories:categories' slug=tag.slug %}">
+                                    <a href="{% url 'categories:subcategories' slug=tag.slug %}">
 
 
                                    <img src="{{ tag.sub_category_image.url }}" alt="" title="{{ tag }}"

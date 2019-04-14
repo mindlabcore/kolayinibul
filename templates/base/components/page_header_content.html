@@ -13,7 +13,7 @@
                         <div class="entry__content">
 
                         <span class="entry__category">
-                            <a href="{% url 'posts:categories' slug=big_box.category.slug %}">{{ big_box.category }}</a></span>
+                            <a href="{% url 'categories:categories' slug=big_box.category.slug %}">{{ big_box.category }}</a></span>
 
                             <h1><a href="{% url 'posts:detail' slug=big_box.slug %}" title="">{{ big_box.title }}</a>
                             </h1>
@@ -45,7 +45,7 @@
                 <div class="entry__content">
                     {% if second_box %}
                         <span class="entry__category"><a
-                                href="{% url 'blog:categories' slug=second_box.category.slug %}">{{ second_box.category }}</a></span>
+                                href="{% url 'categories:categories' slug=second_box.category.slug %}">{{ second_box.category }}</a></span>
                     <h1><a href="{% url 'posts:detail' slug=second_box.slug %}" title="">{{ second_box.title }}</a>
                     </h1>
 
@@ -79,7 +79,7 @@
                     <div class="entry__content">
                         {% if third_box %}
                         <span class="entry__category"><a  style="background-color: #aa6600"
-                                href="{% url 'blog:categories' slug=third_box.category.slug %}">{{ third_box.category }}</a></span>
+                                href="{% url 'categories:categories' slug=third_box.category.slug %}">{{ third_box.category }}</a></span>
 
                         <h1><a href="{% url 'posts:detail' slug=third_box.slug %}" title="">{{ third_box.title }}</a>
                         </h1>
