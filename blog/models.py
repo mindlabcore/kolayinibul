@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -110,3 +111,6 @@ class Post(models.Model):
         slug = self.title.replace("ı", "i")
         slug += "-" + get_random_string(4)
         return slugify(slug)
+
+    def get_absolute_url(self):
+        return reverse('posts:detail', args=[str(self.slug)])

@@ -20,6 +20,13 @@ from base_pages import views as base_pages_view
 from blog import views as blog_views
 from django.conf import settings
 from django.conf.urls.static import static
+from base_pages.sitemaps import PostSitemap, StaticViewSitemap
+from django.contrib.sitemaps.views import sitemap
+
+sitemaps = {
+    'posts': PostSitemap,
+    'static': StaticViewSitemap,
+}
 
 urlpatterns = [
     # admin App:
@@ -44,8 +51,10 @@ urlpatterns = [
     path('faq/', base_pages_view.faq, name="faq"),
     path('contact_us/', base_pages_view.contact_us, name="contact_us"),
     path('search/', base_pages_view.search_view, name="search_view"),
+    path('privacy_page/', base_pages_view.privacy_page, name="privacy_page"),
     path('jobs/', base_pages_view.job_page_coming_soon, name="job_page_coming_soon"),
-
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

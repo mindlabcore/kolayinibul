@@ -26,6 +26,10 @@ def about(request):
     return render(request, "help_pages/about_us.html")
 
 
+def privacy_page(request):
+    return render(request, "help_pages/privacy_page.html")
+
+
 def faq(request):
     return render(request, "help_pages/faq.html")
 

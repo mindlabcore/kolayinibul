@@ -10,7 +10,7 @@
 
                     {% if  forloop.counter == 5 %}
                         <h1></h1>
-                        {% else %}
+                    {% else %}
 
                     {% endif %}
                     <article class="masonry__brick entry format-standard" data-aos="fade-up">
@@ -64,7 +64,7 @@
 
 
                                    <img src="{{ tag.sub_category_image.url }}" alt="" title="{{ tag }}"
-                                         style="width: 10%">
+                                        style="width: 10%">
                                 </a>
                                 {% endfor %}
                             </span>
@@ -75,32 +75,35 @@
 
                     </article> <!-- end article -->
                 {% endfor %}
+                <article class="masonry__brick entry format-standard" data-aos="fade-up" style="height: 552.4px">
 
+                    <script type="text/javascript" data-idzone="3357970" src="https://ads.exdynsrv.com/nativeads.js"></script>
+                </article>
 
 
 
             </div> <!-- end masonry -->
         </div> <!-- end masonry-wrap -->
 
-    <!-- Pagination Start
-        <div class="row">
-            <div class="col-full">
-                <nav class="pgn">
-                    <ul>
-                        <li><a class="pgn__prev" href="#0">Prev</a></li>
-                        <li><a class="pgn__num" href="#0">1</a></li>
-                        <li><span class="pgn__num current">2</span></li>
-                        <li><a class="pgn__num" href="#0">3</a></li>
-                        <li><a class="pgn__num" href="#0">4</a></li>
-                        <li><a class="pgn__num" href="#0">5</a></li>
-                        <li><span class="pgn__num dots">…</span></li>
-                        <li><a class="pgn__num" href="#0">8</a></li>
-                        <li><a class="pgn__next" href="#0">Next</a></li>
-                    </ul>
-                </nav>
+        <!-- Pagination Start
+            <div class="row">
+                <div class="col-full">
+                    <nav class="pgn">
+                        <ul>
+                            <li><a class="pgn__prev" href="#0">Prev</a></li>
+                            <li><a class="pgn__num" href="#0">1</a></li>
+                            <li><span class="pgn__num current">2</span></li>
+                            <li><a class="pgn__num" href="#0">3</a></li>
+                            <li><a class="pgn__num" href="#0">4</a></li>
+                            <li><a class="pgn__num" href="#0">5</a></li>
+                            <li><span class="pgn__num dots">…</span></li>
+                            <li><a class="pgn__num" href="#0">8</a></li>
+                            <li><a class="pgn__next" href="#0">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-        </div>
-            Pagination END -->
+                Pagination END -->
     </section> <!-- s-content -->
 
 {% endblock body %}

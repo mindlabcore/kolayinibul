@@ -22,8 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1pvy#$=1f#%rq3*3wp!+g93hsxa*9h^hsdt&iq-&sejjgd^k+m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 
 ALLOWED_HOSTS = ['www.kolayinibul.com', '127.0.0.1']
 
@@ -37,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # Apps
     'blog',
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -159,8 +162,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = ''
 LOGIN_URL = '/user/login/'
 
-
-
 # Yandex Mail SMTP Setup
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_HOST_USER = 'iletisim@kolayinibul.com'
@@ -169,4 +170,3 @@ DEFAULT_FROM_EMAIL = 'Kolayını Bul! <iletisim@kolayinibul.com>'
 SERVER_EMAIL = 'iletisim@kolayinibul.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-
