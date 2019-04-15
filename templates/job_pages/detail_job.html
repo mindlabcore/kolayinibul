@@ -1,0 +1,70 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% block title %}{{ job.title }} - {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+
+            <div class="row narrow section-intro add-bottom text-center">
+
+                <div class="col-full tab-full">
+
+
+
+                    <h1 style="font-size: 4.3rem;">{{ job.title|upper }}</h1>
+
+                    <div class="row bottom tags-wrap">
+                        <div class="col-full tags">
+                            <div class="tagcloud">
+                                {% for a in tag %}
+                                    <a href="#0">{{ a.sub_category_name }}</a>
+                                {% endfor %}
+
+                            </div>
+                        </div> <!-- end tags -->
+                    </div> <!-- end tags-wrap -->
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-full tab-full">
+                    <div class="col-three">
+                    <ul>
+                        <li>
+                            <p>Firma Adı: {{ job.company_name }}</p>
+                        </li>
+                        <li>
+                            <p>Çalışma Türü: {{ job.get_term_display }}</p>
+                        </li>
+                        <li>
+                            <p>İlan Veren: {{ job.get_type_display }}</p>
+                        </li>
+                        <li>
+                            <p>Ortalama Maaş: {{ job.avg_salary|floatformat }} TL</p>
+                        </li>
+                        <li>
+                            <p>İletişim: {{ job.email_adress }}</p>
+                        </li>
+                    </ul>
+                        </div>
+                    <div class="col-nine">
+                    <p>
+                        {{ job.description|safe }}
+                    </p>
+                    <hr>
+
+                </div>
+                    <a class="btn btn-primary full-width" href="{% url 'jobs:detail' slug=job.slug %}">Başvur</a>
+            </div>
+                </div>
+
+
+        </section>
+    </section>
+{% endblock body %}

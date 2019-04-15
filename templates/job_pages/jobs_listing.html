@@ -1,0 +1,59 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Tüm İş İlanları - {{ block.super }}{% endblock %}
+
+{% block body %}
+
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+            <br>
+
+
+            <div class="row add-bottom">
+                <h3>İş İlanları</h3>
+                <div class="col-twelve">
+                    <div class="table-responsive">
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="text-align: center"></th>
+                                <th style="text-align: center">Pozisyon</th>
+                                <th style="text-align: center">Firma Adı</th>
+                                <th style="text-align: center">Kategori</th>
+                                <th style="text-align: center">İlan Tarihi</th>
+                                <th style="text-align: center">İlan Veren</th>
+                                <th style="text-align: center">Çalışma Türü</th>
+                                <th style="text-align: center"></th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for job in jobs %}
+                                <tr>
+                                    <td><img src="{{ job.sub_category.sub_category_image.url }}" style="width: 50px;height: 50px" alt=""></td>
+                                    <td><a href="{% url 'jobs:detail' slug=job.slug %}">{{ job.title }}</a></td>
+                                    <td>{{ job.company_name }}</td>
+                                    <td>{{ job.sub_category }}</td>
+                                    <td>{{ job.created_date }}</td>
+                                    <td>{{ job.get_type_display }}</td>
+                                    <td>{{ job.get_term_display }}</td>
+                                <td><a class="btn btn-primary" href="{% url 'jobs:detail' slug=job.slug %}">İlana Git</a></td>
+
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div> <!-- end row -->
+        </section>
+    </section>
+
+{% endblock body %}

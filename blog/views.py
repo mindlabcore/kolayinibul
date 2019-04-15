@@ -57,7 +57,9 @@ def add_post(request):
         post.save()
         form.save_m2m()
 
-        messages.success(request, "Post başarıyla oluşturuldu!")
+        messages.success(request,
+                         "Post başarıyla oluşturuldu! Düzenleyebilmen için taslak halinde profilinde seni bekliyor. "
+                         "Tek yapman gereken yayına almak!")
         return redirect("my_profile")
 
     return render(request, "post_pages/new_post.html", {"form": form})
@@ -80,7 +82,7 @@ def update_post(request, slug):
             post.save()
             form.save_m2m()
 
-            messages.success(request, "Post changed successful!")
+            messages.success(request, "Post başarıyla değiştirildi!")
             return redirect("posts:detail", slug=post.slug)
         context = {
             "post": post,
@@ -107,4 +109,3 @@ def delete_post(request, slug):
         messages.error(request, "Bu işlem için yetkili değilsiniz!")
         return redirect("posts:detail", slug=post.slug)
     return redirect("my_profile")
-

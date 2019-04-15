@@ -18,6 +18,7 @@ from django.urls import path, include
 from blog import views as post_views
 from base_pages import views as base_pages_view
 from blog import views as blog_views
+from job import views as job_views
 from django.conf import settings
 from django.conf.urls.static import static
 from base_pages.sitemaps import PostSitemap, StaticViewSitemap
@@ -43,6 +44,10 @@ urlpatterns = [
     path('categories/', include("blog.urls", namespace="categories")),
     path('categories/<slug:slug>', blog_views.categories, name="categories"),
 
+    # job App:
+    path('jobs/', include("job.urls", namespace="jobs")),
+
+
     # base_pages App:
     path('', base_pages_view.index, name="index"),
     path('about_us/', base_pages_view.about, name="about_us"),
@@ -55,6 +60,9 @@ urlpatterns = [
     path('jobs/', base_pages_view.job_page_coming_soon, name="job_page_coming_soon"),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
+
+    # Advertorials
+    path('ads.txt/', base_pages_view.ads, name="ads"),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

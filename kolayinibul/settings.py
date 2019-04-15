@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '1pvy#$=1f#%rq3*3wp!+g93hsxa*9h^hsdt&iq-&sejjgd^k+m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['www.kolayinibul.com', '127.0.0.1', '127.0.0.2']
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blog',
     'user',
     'base_pages',
+    'job',
 
     # 3rd Apps.
     'ckeditor',

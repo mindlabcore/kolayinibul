@@ -77,7 +77,7 @@ def search_view(request):
 
 
 def job_page_coming_soon(request):
-    return render(request, "job_pages/coming_soon.html")
+    return render(request, "job_pages/jobs_listing.html")
 
 
 def categories(request):
@@ -156,3 +156,7 @@ def handler404(request):
 
 def handler500(request):
     return render(request, 'help_pages/500.html', status=500)
+
+
+def ads(request):
+    return render(request, "base/ads/ads")

@@ -9,27 +9,30 @@
 
 <body>
 <section>
-{% if messages %}
-    {% for message in messages %}
-        <div {% if message.tags %} class="alert-box alert-box--{{ message.tags }}"{% endif %}> {{ message }}
-            <i class="fa fa-times alert-box__close"></i>
-        </div>
-    {% endfor %}
-{% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert-box alert-box--{{ message.tags }}"{% endif %}> {{ message }}
+                <i class="fa fa-times alert-box__close"></i>
+            </div>
+        {% endfor %}
+    {% endif %}
 </section>
 
 {% include 'base/components/navbar.html' %}
 
 
-
-
-
 <div id="all">
-    {% block body %}
 
 
-    {% endblock body %}
-</div>
+
+
+
+            {% block body %}
+
+
+            {% endblock body %}
+
+
 
 {% include 'base/components/s-extra-footer-top.html' %}
 {% include 'base/components/footer.html' %}

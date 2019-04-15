@@ -6,14 +6,14 @@
         <!-- start featured__big -->
         <div class="featured">
 
-                <div class="featured__column featured__column--big">
-                    <div class="entry"
-                         style="background-image:url('{% static 'images/thumbs/featured/featured_1.png' %}');">
-{% if big_box %}
+            <div class="featured__column featured__column--big">
+                <div class="entry"
+                     style="background-image:url('{% static 'images/thumbs/featured/featured_1.png' %}');">
+                    {% if big_box %}
                         <div class="entry__content">
 
                         <span class="entry__category">
-                            <a href="{% url 'categories:categories' slug=big_box.category.slug %}">{{ big_box.category }}</a></span>
+                            <a href="{% url 'categories:subcategories' slug=big_box.sub_category.slug %}">{{ big_box.sub_category }}</a></span>
 
                             <h1><a href="{% url 'posts:detail' slug=big_box.slug %}" title="">{{ big_box.title }}</a>
                             </h1>
@@ -31,74 +31,94 @@
                                 </ul>
                             </div>
                         </div> <!-- end entry__content -->
-                        {% else %}
+                    {% else %}
 
-            {% endif %}
-                    </div> <!-- end entry -->
-                </div> <!-- end featured__big -->
+                    {% endif %}
+                </div> <!-- end entry -->
+            </div> <!-- end featured__big -->
 
             <!-- start featured__second_box -->
 
-                <div class="featured__column featured__column--small">
+            <div class="featured__column featured__column--small">
                 <div class="entry"
                      style="background-image:url('{% static 'images/thumbs/featured/featured_2.png' %}');">
-                <div class="entry__content">
-                    {% if second_box %}
-                        <span class="entry__category"><a
-                                href="{% url 'categories:categories' slug=second_box.category.slug %}">{{ second_box.category }}</a></span>
-                    <h1><a href="{% url 'posts:detail' slug=second_box.slug %}" title="">{{ second_box.title }}</a>
-                    </h1>
-
-                    <div class="entry__info">
-
-
-                        <ul class="entry__meta">
-                            <li>
-                                <a href="{% url 'user:profile' slug=second_box.author %}">
-                                    {{ second_box.author }}</a>
-                            </li>
-                            <li>{{ second_box.created_date|date:"F d, Y" }}</li>
-                        </ul>
-                    </div>
-                    {% else %}
-
-            {% endif %}
-                </div>
-
-            <!-- end entry__content -->
-
-            </div>
-                    <!-- end entry -->
-            <!-- end featured__second_box -->
-
-            <!-- start featured__third_box -->
-
-                <div class="entry"
-                     style="background-image:url('{% static 'images/thumbs/featured/featured_3.png' %}');">
-
                     <div class="entry__content">
-                        {% if third_box %}
-                        <span class="entry__category"><a  style="background-color: #aa6600"
-                                href="{% url 'categories:categories' slug=third_box.category.slug %}">{{ third_box.category }}</a></span>
+                        {% if second_box %}
+                            <span class="entry__category"><a
+                                    href="{% url 'categories:subcategories' slug=second_box.sub_category.slug %}">{{ second_box.sub_category }}</a></span>
+                            <h1><a href="{% url 'posts:detail' slug=second_box.slug %}"
+                                   title="">{{ second_box.title }}</a>
+                            </h1>
 
-                        <h1><a href="{% url 'posts:detail' slug=third_box.slug %}" title="">{{ third_box.title }}</a>
-                        </h1>
-
-                        <div class="entry__info">
+                            <div class="entry__info">
 
 
-                            <ul class="entry__meta">
-                                <li><a href="{% url 'user:profile' slug=third_box.author %}">{{ third_box.author }}</a>
-                                </li>
-                                <li>{{ third_box.created_date|date:"F d, Y" }}</li>
-                            </ul>
-                        </div>
+                                <ul class="entry__meta">
+                                    <li>
+                                        <a href="{% url 'user:profile' slug=second_box.author %}">
+                                            {{ second_box.author }}</a>
+                                    </li>
+                                    <li>{{ second_box.created_date|date:"F d, Y" }}</li>
+                                </ul>
+                            </div>
                         {% else %}
-            {% endif %}
-                    </div> <!-- end entry__content -->
 
-                </div> <!-- end entry -->
+                        {% endif %}
+                    </div>
 
+                    <!-- end entry__content -->
+
+                </div>
+                <!-- end entry -->
+                <!-- end featured__second_box -->
+
+                <!-- start featured__third_box -->
+
+                {% if third_box %}
+                    <div class="entry"
+                         style="background-image:url('{% static 'images/thumbs/featured/featured_3.png' %}');">
+                        <div class="entry__content">
+                            <span class="entry__category"><a style="background-color: #aa6600"
+                                                             href="{% url 'categories:subcategories' slug=third_box.sub_category.slug %}">
+                                {{ third_box.sub_category }}
+                            </a>
+                            </span>
+                            <h1><a href="{% url 'posts:detail' slug=third_box.slug %}"
+                                   title="">{{ third_box.title }}</a>
+                            </h1>
+                            <div class="entry__info">
+                                <ul class="entry__meta">
+                                    <li>
+                                        <a href="{% url 'user:profile' slug=third_box.author %}">{{ third_box.author }}</a>
+                                    </li>
+                                    <li>{{ third_box.created_date|date:"F d, Y" }}</li>
+                                </ul>
+                            </div>
+
+                        </div> <!-- end entry__content -->
+                    </div> <!-- end entry -->
+                {% else %}
+                    <!--advertorial-->
+                    <div class="entry" style="background-color: transparent">
+                        <div class="entry__content">
+                            <div style="text-align: center;width: content-box">
+                                <script type="text/javascript">
+                                    var ad_idzone = "3358958",
+                                        ad_width = "300",
+                                        ad_height = "250"
+                                </script>
+                                <script type="text/javascript" src="https://ads.exdynsrv.com/ads.js"></script>
+                                <noscript>
+                                    <iframe src="https://syndication.exdynsrv.com/ads-iframe-display.php?idzone=3358958&output=noscript&type=300x250"
+                                            width="300" height="250" scrolling="no" marginwidth="0" marginheight="0"
+                                            frameborder="0"></iframe>
+                                </noscript>
+                            </div>
+                        </div> <!-- end entry__content -->
+                    </div> <!-- end entry -->
+                    <!-- Advertorial end -->
+
+                {% endif %}
 
             </div> <!-- end featured -->
         </div> <!-- end featured__third_box -->
