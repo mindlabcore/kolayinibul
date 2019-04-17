@@ -2,6 +2,8 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from blog.forms import PostForm
 from django.contrib import messages
 from blog.models import Category, SubCategory, Post
+from job.models import JobAdvertisement
+from user.models import Profile
 from django.views.generic import UpdateView, CreateView, FormView
 from django.http import JsonResponse
 from django.views import View
@@ -44,7 +46,7 @@ def dashboard(request):
 
 
 @login_required
-def my_profile(request):
+def my_posts(request):
     """
     user = request.user
     if not user.is_authenticated:
@@ -58,7 +60,40 @@ def my_profile(request):
         "posts": posts
     }
 
+    return render(request, "profile_pages/my_posts.html", context)
+
+
+@login_required
+def my_profile(request):
+    #  detail = Profile.objects.filter(id=id)
+    #  profile_detail = Profile.objects.filter(slug=slug)
+    profile_detail = get_object_or_404(Profile, user=request.user)
+    user_posts = Post.objects.filter(author=profile_detail.id)
+    user_jobs = JobAdvertisement.objects.filter(employer=profile_detail.id)
+    context = {
+        "profile_detail": profile_detail,
+        "user_posts": user_posts,
+        "user_jobs": user_jobs
+    }
     return render(request, "profile_pages/my_profile.html", context)
+
+
+@login_required
+def my_jobs(request):
+    """
+    user = request.user
+    if not user.is_authenticated:
+        products = []  # if olumsuz olarak kullanıldı. (kullanıcı authanticated değilse...)
+    else:
+        products = Product.objects.filter(seller=request.user)
+    """
+    jobs = JobAdvertisement.objects.filter(employer=request.user)
+    #  posts = get_object_or_404(Post, author=request.user)
+    context = {
+        "jobs": jobs
+    }
+
+    return render(request, "profile_pages/my_jobs.html", context)
 
 
 def search_view(request):

@@ -10,7 +10,7 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=50, verbose_name="Category Name")
+    category_name = models.CharField(max_length=50, verbose_name="Category Adı")
     slug = models.SlugField(max_length=55, blank=True, null=True)
 
     def save(self, *args, **kwargs):
@@ -32,7 +32,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='subcategories')
-    sub_category_name = models.CharField(max_length=50, verbose_name="Sub-Category Name")
+    sub_category_name = models.CharField(max_length=50, verbose_name="Alt-Category Adı")
     slug = models.SlugField(max_length=55, blank=True, null=True)
     sub_category_image = models.FileField(upload_to='sub_category_images/', null=True, blank=True)
 

@@ -13,12 +13,12 @@ class JobAdvertisement(models.Model):
     employer = models.ForeignKey("auth.User", on_delete=models.CASCADE, verbose_name="İşveren")
     company_name = models.CharField(max_length=50, verbose_name="Firma Adı", blank=True, null=True)
     email_adress = models.EmailField(blank=True, null=True)
-    avg_salary = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True)
+    avg_salary = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name="Ortalama Maaş")
     category = models.ForeignKey('blog.Category', on_delete=models.CASCADE, verbose_name="Kategori Adı",
                                  related_name="job_category")
     sub_category = models.ForeignKey('blog.SubCategory', on_delete=models.CASCADE, verbose_name="Alt Kategori Adı",
                                      related_name="job_sub_category")
-    title = models.CharField(max_length=50, verbose_name="İş Başlığı")
+    title = models.CharField(max_length=50, verbose_name="Pozisyon")
     slug = models.SlugField(max_length=55, blank=True, null=True)
     description = RichTextField(max_length=100000, null=False, verbose_name="İş Açıklaması")
     company_logo = models.ImageField(upload_to='company_logos/', null=True, blank=True,
@@ -33,7 +33,7 @@ class JobAdvertisement(models.Model):
         (TYPE_COMPANY, 'Firma'),
         (TYPE_INDIVIDUAL, 'Bireysel')
     )
-    type = models.SmallIntegerField(choices=TYPES)
+    type = models.SmallIntegerField(choices=TYPES, verbose_name="İşveren Tipi")
 
     TERM_SHORT = 1
     TERM_LONG = 2
@@ -45,9 +45,9 @@ class JobAdvertisement(models.Model):
         (TERM_LONG, 'Uzun Dönem'),
         (TERM_ONE_TIME, 'Tek Seferlik'),
         (TERM_INTERNSHIP, 'Staj'),
-        (TERM_REMOTE, 'Uzaktan Çalışma')
+        (TERM_REMOTE, 'Remote')
     )
-    term = models.SmallIntegerField(choices=TERMS)
+    term = models.SmallIntegerField(choices=TERMS, verbose_name="Dönem")
 
     STATUS_DRAFT = 1
     STATUS_PUBLISHED = 2

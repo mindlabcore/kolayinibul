@@ -44,7 +44,7 @@
 
 
                                 <div class="entry__content">
-                                    <a href="{% url 'index' %}" class="entry__profile-pic">
+                                    <a href="{% url 'user:profile' slug=post.author %}" class="entry__profile-pic">
                                         <img class="avatar" src="{{ post.author.profile.avatar.url }}" alt="">
                                     </a>
 

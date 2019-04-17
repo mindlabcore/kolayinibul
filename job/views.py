@@ -15,7 +15,6 @@ def jobs(request):
     return render(request, 'job_pages/jobs_listing.html', context)
 
 
-@login_required
 def detail(request, slug):
     # story = Story.objects.filter(id = id).first()
     job = get_object_or_404(JobAdvertisement, slug=slug)
@@ -31,6 +30,7 @@ def detail(request, slug):
 @login_required
 def add_job(request):
     form = JobAdvertisementForm(request.POST or None, request.FILES or None)
+
 
     if form.is_valid():
         job = form.save(commit=False)

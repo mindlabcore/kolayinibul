@@ -1,17 +1,18 @@
 from django import forms
 import datetime
 from datetime import date
+from user.models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label="Username")
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    username = forms.CharField(label="Kullanıcı Adı")
+    password = forms.CharField(label="Şifre", widget=forms.PasswordInput)
 
 
 class SignupForm(forms.Form):
-    username = forms.CharField(max_length=50, label="Username")
-    password = forms.CharField(max_length=20, label="Password", widget=forms.PasswordInput)
-    confirm = forms.CharField(max_length=20, label="Confirm Password", widget=forms.PasswordInput)
+    username = forms.CharField(max_length=50, label="Kullanıcı Adı")
+    password = forms.CharField(max_length=20, label="Şifre", widget=forms.PasswordInput)
+    confirm = forms.CharField(max_length=20, label="Şifre Onayla", widget=forms.PasswordInput)
     email = forms.EmailField()
     first_name = forms.CharField(max_length=30, label="İsim")
     last_name = forms.CharField(max_length=150, label="Soyisim")
@@ -48,7 +49,7 @@ class ChangePasswordForm(forms.Form):
         confirm = self.cleaned_data.get("confirm")
 
         if password and confirm and password != confirm:
-            raise forms.ValidationError("Passwords are not correct! Please try again.")
+            raise forms.ValidationError("Parolalar birbiriyle uyuşmuyor!")
 
         values = {
             "password": password,
@@ -59,3 +60,31 @@ class ChangePasswordForm(forms.Form):
 class ImageUploadForm(forms.Form):
     """Image upload form."""
     image = forms.ImageField()
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+
+        fields = [
+
+            "first_name",
+            "last_name",
+            "bio",
+            "school",
+            "education",
+            "city",
+            "birth_date",
+            "avatar",
+            "job",
+            "skills",
+            "github_profile",
+            "twitter_profile",
+            "stack_overflow_profile",
+            "facebook_profile",
+            "instagram_profile",
+            "linkedin_profile",
+            "skype_profile",
+            "spotify_profile"
+
+        ]

@@ -19,7 +19,7 @@
                             </h1>
 
                             <div class="entry__info">
-                                <a href="{% url 'index' %}" class="entry__profile-pic">
+                                <a href="{% url 'user:profile' slug=big_box.author %}" class="entry__profile-pic">
                                     <img class="avatar" src="{{ big_box.author.profile.avatar.url }}" alt="">
                                 </a>
 

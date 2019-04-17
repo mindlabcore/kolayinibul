@@ -88,7 +88,7 @@ html, body {
 body {
     background: #19191b;
     font-family: 'Comfortaa', cursive;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: normal;
     line-height: 1.875;
@@ -177,7 +177,7 @@ h5, .h5, h6, .h6 {
 }
 
 h1, .h1 {
-    font-size: 3.6rem;
+    font-size: 3.2rem;
     line-height: 1.25;
     letter-spacing: -.1rem;
 }
@@ -203,7 +203,7 @@ h2, .h2 {
 }
 
 h3, .h3 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     line-height: 1.25;
 }
 
@@ -838,12 +838,12 @@ input[type="reset"],
 input[type="button"] {
     display: inline-block;
     font-family: 'Comfortaa', cursive;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     text-transform: uppercase;
-    letter-spacing: .3rem;
-    height: 5.4rem;
-    line-height: 5rem;
-    padding: 0 3rem;
+    letter-spacing: .2rem;
+    height: 4.4rem;
+    line-height: 4rem;
+    padding: 0 2rem;
     margin: 0 .3rem 1.2rem 0;
     color: #000000;
     text-decoration: none;
@@ -1573,7 +1573,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .masonry .entry__excerpt {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: 1.8;
 }
 
@@ -2958,7 +2958,7 @@ html.no-csstransitions .featured {
     }
 
     .s-content__header h1 {
-        font-size: 4.5rem;
+        font-size: 4.0rem;
     }
 
 }
@@ -4320,10 +4320,27 @@ footer h4::after {
 }
 
 
-.search-field{
-    color:white;
+.search-field {
+    color: white;
     text-align: center;
 }
-input:focus::-webkit-input-placeholder { color:transparent; }
-.search-field:focus::-webkit-input-placeholder { color:transparent;
-    display: none !important; }
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.search-field:focus::-webkit-input-placeholder {
+    color: transparent;
+    display: none !important;
+}
+
+
+@media only screen and (max-width: 480px){
+    .bcAds {
+    display: none;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+    }
+}
+

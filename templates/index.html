@@ -5,9 +5,7 @@
 
 
     <section class="s-content">
-
-
-        <div class="row masonry-wrap">
+        <div class="row masonry-wrap" style="margin-top: -64px">
             <div class="masonry">
                 <div class="grid-sizer"></div>
                 {% for post in posts %}
@@ -43,7 +41,7 @@
 
                             <div class="entry__excerpt">
                                 <p>
-                                    {{ post.description|striptags|truncatewords:28|safe }}
+                                    {{ post.description|striptags|truncatewords:45|safe }}
                                 </p>
                             </div>
 
@@ -89,12 +87,14 @@
                 </article>
 
                 <article class="masonry__brick entry format-standard" data-aos="fade-up">
+
                     <script type="text/javascript" data-idzone="3358740"
                             src="https://ads.exdynsrv.com/nativeads.js"></script>
-                </article>
 
+                </article>
             </div> <!-- end masonry -->
         </div> <!-- end masonry-wrap -->
+
 
         <!-- Pagination Start
             <div class="row">
@@ -115,9 +115,8 @@
                 </div>
             </div>
                 Pagination END -->
+
     </section> <!-- s-content -->
-
-
 
 
 

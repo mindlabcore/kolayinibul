@@ -13,10 +13,11 @@
         flex-flow:row wrap;
 text-align: center;">
             <div class="col-six tab-full">
-                <h3 class="add-bottom">Login</h3>
+                <br>
                 <form method="post" action="{% url 'user:login' %}">
                     <div>
                         {% csrf_token %}
+                        {{ form.media }}
                         {{ form }}
                         <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                     </div>
@@ -25,20 +26,16 @@ text-align: center;">
                     <button type="submit" class="btn--primary">
 
 
-                        Login
+                        Giriş
 
                     </button>
                     <hr>
 
-
-                        <a href="{% url 'password_reset' %}" style="width: 430px;line-height: 1.9rem;"
-                           class="button" role="button">Parolamı Unuttum :(</a>
+                    <a href="{% url 'user:sign_up' %}"
+                       class="btn btn--stroke" role="button">Üye Ol</a>
                     <hr>
-                        <a href="{% url 'user:sign_up' %}" style="width: 430px;line-height: 1.9rem;"
-                           class="button" role="button">Üye Ol</a>
-
-
-
+                    <a href="{% url 'password_reset' %}"
+                       class="btn btn-primary" role="button">Parolamı Unuttum :(</a>
 
 
                 </form>

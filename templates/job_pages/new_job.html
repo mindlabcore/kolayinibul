@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Yeni İş İlanı - {{ block.super }}{% endblock %}
 
-</body>
-</html>
+{% block body %}
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+            <div class="row">
+                <div class="col-full tab-full">
+                    <div class="heading">
+                        <h2>Yeni İlan Ver</h2>
+                    </div>
+                    <hr>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {{ form.media }}
+                        {{ form.as_p }}
+                        <br>
+                        <button type="submit" class="btn btn--primary full-width">Yayınla</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+
+{% endblock body %}

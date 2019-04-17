@@ -89,7 +89,16 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li><a href="{% url 'job_page_coming_soon' %}" title="">İş İlanları</a></li>
+
+                    <li class="has-children">
+                        <a href="#0" title="">İş İlanları</a>
+                        <ul class="sub-menu">
+                    <li><a href="{% url 'job:jobs' %}" title="">Açık İlanlar</a></li>
+                            <li><a href="{% url 'job:add_job' %}" title="">İlan Ver</a></li>
+                        </ul>
+                    </li>
+
+
                     <li><a href="{% url 'about_us' %}" title="">Biz Kimiz?</a></li>
                     <li><a href="{% url 'contact_us' %}" title="">İletişim</a></li>
 
@@ -97,7 +106,9 @@
                         <li class="has-children">
                             <a href="#0" title="">{{ request.user.username }}</a>
                             <ul class="sub-menu">
-                                <li><a href="{% url 'my_profile' %}">Yazılarım</a></li>
+                                <li><a href="{% url 'my_profile' %}">Profil Sayfam</a></li>
+                                <li><a href="{% url 'my_posts' %}">Postlarım</a></li>
+                                <li><a href="{% url 'my_jobs' %}">İş İlanlarım</a></li>
                                 <li><a href="{% url 'user:change_password' %}">Şifremi Değiştir</a></li>
                                 <li><a href="{% url 'user:logout' %}">Çıkış Yap</a></li>
                             </ul>

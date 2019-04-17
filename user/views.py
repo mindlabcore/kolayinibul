@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -10,6 +10,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.mail import send_mail, EmailMessage, BadHeaderError
 from django.template.loader import render_to_string
+from blog.models import Post
+from job.models import JobAdvertisement
+from django.utils import timezone
 
 
 def sign_up(request):
@@ -102,13 +105,16 @@ def upload_pic(request):
     return HttpResponseForbidden('allowed only via POST')
 
 
-@login_required
 def profile(request, slug):
     #  detail = Profile.objects.filter(id=id)
     #  profile_detail = Profile.objects.filter(slug=slug)
     profile_detail = get_object_or_404(Profile, slug=slug)
+    user_posts = Post.objects.filter(author=profile_detail.id)
+    user_jobs = JobAdvertisement.objects.filter(employer=profile_detail.id)
     context = {
-        "profile_detail": profile_detail
+        "profile_detail": profile_detail,
+        "user_posts": user_posts,
+        "user_jobs": user_jobs
     }
     return render(request, "profile_pages/profile.html", context)
 
@@ -131,23 +137,27 @@ def change_password(request):
     })
 
 
-def contact_us(request):
-    form = ContactUsForm(request.POST or None)
-    context = {
-        "form": form
-    }
-    if form.is_valid():
-        cName = form.cleaned_data.get("cName")
-        cEmail = form.cleaned_data.get("cEmail")
-        cMessage = form.cleaned_data.get("cMessage")
+@login_required
+def update_profile(request):
+    #  Profile sayfası.
+    profile = get_object_or_404(Profile, user=request.user)
+    form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
+    if profile.user != request.user:
+        messages.error(request, "Bu işlem için yetkili değilsiniz!")
+        return redirect("user:profile", slug=profile.slug)
 
-        body = context
-        sending = EmailMessage('Parola Sıfırlama', body, to=["iletisim@kolayinibul.com"])
-        sending.send()
-        messages.success(request, "Mesajınızı aldık, teşekkür ederiz!")
-        return redirect("index")
-    messages.warning((request,))
-    return render(request, "help_pages/contact_us.html", context)
+    else:
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.updated_date = timezone.now()
+            profile.save()
+            form.save_m2m()
 
-
-
+            messages.success(request, "Profil bilgileri başarıyla değiştirildi!")
+            return redirect("user:profile", slug=profile.slug)
+        context = {
+            "profile": profile,
+            "form": form,
+        }
+    return render(request, "profile_pages/edit_profile.html", context)

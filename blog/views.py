@@ -33,7 +33,6 @@ def posts(request):
     return render(request, context)
 
 
-@login_required
 def detail(request, slug):
     # story = Story.objects.filter(id = id).first()
     post = get_object_or_404(Post, slug=slug)

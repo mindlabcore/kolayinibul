@@ -19,15 +19,16 @@
 
             <div class="col-six tab-full">
 
-                <h3 class="add-bottom">Sign Up</h3>
+                <h3 class="add-bottom">Kaydol</h3>
 
                 <form method="post" action="{% url 'user:sign_up' %}">
                     <div>
                         {% csrf_token %}
+                        {{ form.media }}
                         {{ form }}
                         <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                     </div>
-                    <input class="btn--primary" type="submit" value="Submit">
+                    <input class="btn--primary" type="submit" value="Gönder">
 
                 </form>
 

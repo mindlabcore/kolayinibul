@@ -1,71 +1,128 @@
 {% extends "base/layout.html" %}
 {% load static %}
 {% include 'base/components/scripts.html' %}
-{% block title %}My Profile - {{ block.super }}{% endblock %}
+{% block title %}Profilim - {{ block.super }}{% endblock %}
+
+
 
 {% block body %}
 
-    <section class="s-content" style="padding-top: 0px">
+
+    <section class="s-content" style="padding-top: 0rem">
         <section id="styles" class="s-styles">
-            <br>
+            <hr>
+            <div class="container bootstrap snippet">
+                <div class="row">
+
+                    <div class="col-sm-3" style="border: #EFC702 dashed 2px; padding: 19px"><!--left col-->
+                    <a class="btn btn-primary" href="{% url 'user:update_profile' %}">Profilini Güncelle</a>
+                        <div class="text-center">
+                            <h1 align="center">{{ profile_detail.user }}</h1>
+                            <img src="{{ profile_detail.avatar.url }}" class="avatar img-circle img-thumbnail"
+                                 alt="avatar" style="width: 150px;height: 150px">
+                        </div>
+                        <div style="text-align: justify;word-wrap: break-spaces;width: 155px">
+                            <hr>
+                            <p>{{ profile_detail.bio }}</p>
+                        </div>
+                        <hr>
+                        <ul class="disc">
+                            <li class="list-group-item text-right"><span
+                                    class="pull-left"><strong>Postlar</strong></span>{{ user_posts.count }}</li>
+                            <li class="list-group-item text-right"><span class="pull-left"><strong>İş İlanları</strong></span>{{ user_jobs.count }}
+                            </li>
+                            <li class="list-group-item text-right"><span
+                                    class="pull-left"><strong>Takipçiler</strong></span> 0
+                            </li>
+                            <li class="list-group-item text-right"><span
+                                    class="pull-left"><strong>Takip Ettikleri</strong></span> 0
+                            </li>
+                        </ul>
+                        <div class="panel panel-default" align="center">
+                            <hr>
+                            <div class="panel-body">
+                                {% if profile_detail.github_profile %}
+                                    <a href="{{ profile_detail.github_profile }}" target="_blank"><img
+                                            style="width: 24px"
+                                            src="{% static 'icons/github.png' %}"
+                                            alt=""></a>
+                                {% else %}
+                                {% endif %}
+                                {% if profile_detail.linkedin_profile %}
+                                    <a href="{{ profile_detail.linkedin_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/linkedin.png' %}" alt=""></a>
+                                {% else %}
+                                {% endif %}
+
+                                {% if profile_detail.stack_overflow_profile %}
+                                    <a href="{{ profile_detail.stack_overflow_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/stack-overflow.png' %}"
+                                             alt=""></a>
+                                {% else %}
+                                {% endif %}
+
+                                {% if profile_detail.twitter_profile %}
+                                    <a href="{{ profile_detail.twitter_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/twitter.png' %}" alt=""></a>
+                                {% else %}
+                                {% endif %}
+
+                                {% if profile_detail.instagram_profile %}
+                                    <a href="{{ profile_detail.instagram_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/instagram.png' %}" alt=""></a>
+                                {% else %}
+                                {% endif %}
+
+                                {% if profile_detail.skype_profile %}
+                                    <a href="{{ profile_detail.skype_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/skype.png' %}" alt=""></a>
+                                {% else %}
+                                {% endif %}
+
+                                {% if profile_detail.spotify_profile %}
+                                    <a href="{{ profile_detail.spotify_profile }}" target="_blank">
+                                        <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt=""></a>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div><!--/col-3-->
+                    <div class="col-sm-9">
+                        <div class="tab-content">
+                            <div class="table-bordered">
+                                <br><br><br>
+                                <a href="{% url 'my_posts' %}"><h6>Yayınladığım Postlarım</h6></a>
+                                <ul>
+                                    {% for post in user_posts %}
+                                    <li>
+                                        <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        <div class="table-bordered">
+                                <br><br><br>
+                                <a href="{% url 'my_jobs' %}"><h6>Yayınladığım İş İlanlarım</h6></a>
+                                <ul>
+                                    {% for job in user_jobs %}
+                                    <li>
+                                        <a href="{% url 'jobs:detail' slug=job.slug %}">{{ job.title }}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
 
 
-            <div class="row add-bottom">
-                <h1>Tüm Yazılarım</h1>
-                <div class="col-twelve">
-                    <div class="table-responsive">
+                        </div><!--/tab-pane-->
+                    </div><!--/tab-content-->
 
-                        <table>
-                            <thead>
-                            <tr>
-                                <th style="text-align: center">Başlık</th>
-                                <th style="text-align: center">Kategori</th>
-                                <th style="text-align: center">Alt Kategori</th>
-                                <th style="text-align: center">Eklenme Tarihi</th>
-                                <th style="text-align: center">Durum</th>
-                                <th style="text-align: center">Okunma</th>
-                                <th style="text-align: center">Beğenme</th>
+                </div><!--/col-9-->
+            </div><!--/row-->
 
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for post in posts %}
-                                <tr>
-                                    <td><a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a></td>
-                                    <td>{{ post.category }}</td>
-                                    <td>{{ post.sub_category }}</td>
-                                    <td>{{ post.created_date }}</td>
-                                    {% if post.active_post == 2 %}
-                                        <td>Aktif</td>
-                                    {% else %}
-                                        <td>Arşivlenmiş</td>
-                                    {% endif %}
-
-                                    <td>17763</td>
-                                    <td>4543</td>
-                                    <td><a href="{% url 'posts:update' slug=post.slug %}"
-                                           class="btn btn-info">Düzenle</a></td>
-                                    {% if post.active_post == 2 %}
-                                        <td><a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-info">Yayından
-                                            Kaldır</a>
-                                            {% else %}
-                                        <td>
-                                        <a href="{% url 'posts:delete' slug=post.slug %}" class="btn btn-info">Yayına
-                                            Al</a>
-                                    {% endif %}
-                                    </td>
-
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </div> <!-- end row -->
         </section>
     </section>
-{% endblock body %}
+
+{% endblock %}
+
