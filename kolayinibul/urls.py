@@ -17,15 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from blog import views as post_views
 from base_pages import views as base_pages_view
+from job import views as job_views
 from blog import views as blog_views
 from job import views as job_views
 from django.conf import settings
 from django.conf.urls.static import static
-from base_pages.sitemaps import PostSitemap, StaticViewSitemap
+from base_pages.sitemaps import PostSitemap, StaticViewSitemap, JobAdvertisementSitemap
 from django.contrib.sitemaps.views import sitemap
 
 sitemaps = {
     'posts': PostSitemap,
+    'jobs': JobAdvertisementSitemap,
     'static': StaticViewSitemap,
 }
 
