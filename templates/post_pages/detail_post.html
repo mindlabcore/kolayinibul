@@ -34,6 +34,7 @@
                     </p>
                 </div>
                 <hr>
+                <p>Eklenme Tarihi: {{ post.created_date|date:"F d, Y, H:i" }}</p>
                 {% if post.sources %}
                     <h3>Kaynaklar:</h3>
                     <a href="{{ post.sources }}">{{ post.sources }}</a>
@@ -113,7 +114,7 @@
 
                             {% if post.author.profile.spotify_profile %}
                                 <a href="{{ post.author.profile.spotify_profile }}" target="_blank">
-                                <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt=""></a>
+                                    <img style="width: 24px" src="{% static 'icons/spotify.png' %}" alt=""></a>
                             {% else %}
                             {% endif %}
                         </div>
@@ -123,5 +124,85 @@
             <!-- Author Details end-->
 
         </section>
+
+        <!-- comments
+    ================================================== -->
+        <div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+
+                    <h3 class="h2">{{ comment.count }} Yorum</h3>
+
+                    <!-- commentlist -->
+                    <ol class="commentlist">
+                    {% if comment %}
+
+
+
+                        {% for comment in comment %}
+                            <li class="depth-1 comment" style="padding-left: 9%">
+
+                                <div class="comment__avatar">
+                                    <img width="50" height="50" class="avatar"
+                                         src="{{ comment.comment_author.profile.avatar.url }}" alt="">
+                                </div>
+
+                                <div class="comment__content" style="border: #0b0b0b solid 1px; padding: 19px">
+
+                                    <div class="comment__info">
+                                        <cite>{{ comment.comment_author }}</cite>
+                                        <span><time class="comment__time">| {{ comment.comment_date|date:"F d, Y, H:i" }}</time></span>
+
+                                        <div class="comment__meta">
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="comment__text">
+                                    <p>{{ comment.comment_content|safe }}</p>
+                                </div>
+
+                                </div>
+
+                            </li> <!-- end comment level 1 -->
+                        {% endfor %}
+                    {% else %}
+                    <div class="alert alert-danger">
+                        Bu posta herhangi bir yorum yapılmadı. İlk taşı siz atın!
+                    </div>
+                    {% endif %}
+                    </ol> <!-- end commentlist -->
+
+
+                    <!-- respond
+                    ================================================== -->
+                    <div class="respond" style="border: #EFC702 dashed 2px; padding: 19px">
+
+                        <h3 class="h2">Yorum Ekle</h3>
+
+                        <form name="contactForm" id="contactForm" method="post"
+                              action="{% url 'posts:comment' slug=post.slug %}">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="message form-field">
+                                    <textarea name="comment_content" id="comment_content" class="full-width"
+                                              placeholder="Yorumunuz"  style="min-height: 16rem"></textarea>
+                                </div>
+
+                                <button type="submit" class="submit btn--primary btn--large full-width">Yorumu Gönder!
+                                </button>
+
+                            </fieldset>
+                        </form> <!-- end form -->
+
+                    </div> <!-- end respond -->
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div> <!-- end comments-wrap -->
+
     </section>
 {% endblock body %}

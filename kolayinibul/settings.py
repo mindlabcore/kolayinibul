@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_extensions',
     'crispy_forms',
+    'robots',
 ]
 
 SITE_ID = 1
@@ -84,11 +85,16 @@ TEMPLATES = [
                 'base_pages.views.second_box',
                 'base_pages.views.third_box',
 
+
             ],
         },
     },
 ]
-
+ROBOTS_USE_SITEMAP = True
+ROBOTS_SITEMAP_URLS = [
+    'https://www.kolayinibul.com/sitemap.xml'
+]
+ROBOTS_SITEMAP_VIEW_NAME = 'cached-sitemap'
 WSGI_APPLICATION = 'kolayinibul.wsgi.application'
 
 # Database

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, SubCategory
+from .models import Post, Category, SubCategory, Comment
 
 
 @admin.register(Category)
@@ -22,7 +22,16 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["id", "category", "title", "sub_category", "author", "created_date", "page_header_content", "active_post"]
+    list_display = ["id", "category", "title", "sub_category", "author", "created_date", "page_header_content",
+                    "active_post"]
 
     class Meta:
         model = Post
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ["id", "post", "comment_author", "comment_date"]
+
+    class Meta:
+        model = Comment

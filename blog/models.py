@@ -29,6 +29,9 @@ class Category(models.Model):
         slug = self.category_name.replace("ı", "i")
         return slugify(slug)
 
+    def get_absolute_url(self):
+        return reverse('categories:categories', args=[str(self.slug)])
+
 
 class SubCategory(models.Model):
     category_name = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, related_name='subcategories')
@@ -51,6 +54,9 @@ class SubCategory(models.Model):
     def get_slug(self):
         slug = self.sub_category_name.replace("ı", "i")
         return slugify(slug)
+
+    def get_absolute_url(self):
+        return reverse('categories:subcategories', args=[str(self.slug)])
 
 
 class Post(models.Model):
@@ -114,3 +120,19 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('posts:detail', args=[str(self.slug)])
+
+    class Meta:
+        ordering = ['-created_date']
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="Post", related_name="comments")
+    comment_author = models.ForeignKey("auth.User", on_delete=models.CASCADE, verbose_name="Yorum Sahibi")
+    comment_content = models.CharField(max_length=1000, verbose_name="Yorum")
+    comment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.comment_content
+
+    class Meta:
+        ordering = ['comment_date']

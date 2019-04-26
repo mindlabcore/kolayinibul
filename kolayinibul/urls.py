@@ -21,14 +21,18 @@ from job import views as job_views
 from blog import views as blog_views
 from job import views as job_views
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
-from base_pages.sitemaps import PostSitemap, StaticViewSitemap, JobAdvertisementSitemap
+from base_pages.sitemaps import PostSitemap, StaticViewSitemap, JobAdvertisementSitemap, CategorySitemap, \
+    SubcategorySitemap
 from django.contrib.sitemaps.views import sitemap
 
 sitemaps = {
     'posts': PostSitemap,
     'jobs': JobAdvertisementSitemap,
     'static': StaticViewSitemap,
+    'category': CategorySitemap,
+    'subcategory': SubcategorySitemap,
 }
 
 urlpatterns = [
@@ -49,7 +53,6 @@ urlpatterns = [
     # job App:
     path('jobs/', include("job.urls", namespace="jobs")),
 
-
     # base_pages App:
     path('', base_pages_view.index, name="index"),
     path('about_us/', base_pages_view.about, name="about_us"),
@@ -64,6 +67,8 @@ urlpatterns = [
     path('jobs/', base_pages_view.job_page_coming_soon, name="job_page_coming_soon"),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt/', include("robots.urls", namespace="")),
+    url(r'^robots\.txt', include('robots.urls')),
 
     # Advertorials
     path('ads.txt/', base_pages_view.ads, name="ads"),

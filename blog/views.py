@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, reverse
 from .forms import PostForm
 from django.contrib import messages
-from .models import Post, Category, SubCategory
+from .models import Post, Category, SubCategory, Comment
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
@@ -38,9 +38,11 @@ def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     tag = post.tag.all()
     # story = Story.objects.filter(slug=slug)
+    comment = post.comments.all()
     context = {
         "post": post,
         "tag": tag,
+        "comment": comment,
 
     }
     return render(request, "post_pages/detail_post.html", context)
@@ -108,3 +110,19 @@ def delete_post(request, slug):
         messages.error(request, "Bu işlem için yetkili değilsiniz!")
         return redirect("posts:detail", slug=post.slug)
     return redirect("my_profile")
+
+
+@login_required
+def add_comment(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if request.method == "POST":
+        comment_author = request.user
+        comment_content = request.POST.get("comment_content")
+        new_comment = Comment(comment_author=comment_author, comment_content=comment_content)
+        new_comment.post = post
+        new_comment.save()
+        return redirect(reverse("posts:detail", kwargs={"slug": slug}))
+
+
+
+
