@@ -21,7 +21,7 @@ from job import views as job_views
 from blog import views as blog_views
 from job import views as job_views
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import url, handler400, handler500
 from django.conf.urls.static import static
 from base_pages.sitemaps import PostSitemap, StaticViewSitemap, JobAdvertisementSitemap, CategorySitemap, \
     SubcategorySitemap
@@ -34,6 +34,7 @@ sitemaps = {
     'category': CategorySitemap,
     'subcategory': SubcategorySitemap,
 }
+
 
 urlpatterns = [
     # admin App:
@@ -73,5 +74,11 @@ urlpatterns = [
     # Advertorials
     path('ads.txt/', base_pages_view.ads, name="ads"),
 
+    # 404 and 500 Error Pages
+    path('404_test/', base_pages_view.handler404, name="404_test"),
+    path('500_test/', base_pages_view.handler500, name="500_test"),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
