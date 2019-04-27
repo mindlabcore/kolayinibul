@@ -169,7 +169,7 @@
                             </li> <!-- end comment level 1 -->
                         {% endfor %}
                     {% else %}
-                    <div class="alert alert-danger">
+                    <div class="alert-box alert-box--error">
                         Bu posta herhangi bir yorum yapılmadı. İlk taşı siz atın!
                     </div>
                     {% endif %}
@@ -181,7 +181,7 @@
                     <div class="respond" style="border: #EFC702 dashed 2px; padding: 19px">
 
                         <h3 class="h2">Yorum Ekle</h3>
-
+                        {% if request.user.is_authenticated %}
                         <form name="contactForm" id="contactForm" method="post"
                               action="{% url 'posts:comment' slug=post.slug %}">
                             {% csrf_token %}
@@ -196,6 +196,13 @@
 
                             </fieldset>
                         </form> <!-- end form -->
+                        {% else %}
+                        <div class="alert-box alert-box--info">
+                        <p>Yorum yapmak için önce giriş yapmalısınız :(</p> <a href="{% url 'user:login' %}">Giriş yapın!</a>
+
+                            </div>
+
+                            {% endif %}
 
                     </div> <!-- end respond -->
 
