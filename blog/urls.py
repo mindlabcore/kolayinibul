@@ -15,6 +15,7 @@ urlpatterns = [
     path('subcategories/<slug:slug>', views.sub_categories, name="subcategories"),
     path('post/<slug:slug>', views.detail, name="detail"),
     path('add_post/', views.add_post, name="add_post"),
+    path('add_post2/', views.add_post2, name="add_post2"),
     path('update/<slug:slug>', views.update_post, name="update"),
     path('delete/<slug:slug>', views.delete_post, name="delete"),
     path('comment/<slug:slug>', views.add_comment, name="comment"),

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from blog import views as post_views
 from base_pages import views as base_pages_view
+from user import views as user_pages_view
 from job import views as job_views
 from blog import views as blog_views
 from job import views as job_views
@@ -35,7 +36,6 @@ sitemaps = {
     'subcategory': SubcategorySitemap,
 }
 
-
 urlpatterns = [
     # admin App:
     path('admin/', admin.site.urls),
@@ -45,6 +45,10 @@ urlpatterns = [
     path('accounts/login', include('django.contrib.auth.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include('django.contrib.auth.urls')),
+
+    # oAuth Login:
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
+    url(r'^settings/password/$', user_pages_view.github_password, name='password'),
 
     # blog App:
     path('posts/', include("blog.urls", namespace="posts")),
@@ -80,5 +84,3 @@ urlpatterns = [
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-

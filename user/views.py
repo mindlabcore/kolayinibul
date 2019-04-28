@@ -1,18 +1,16 @@
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import LoginForm, SignupForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.http import HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
-from django.core.mail import send_mail, EmailMessage, BadHeaderError
-from django.template.loader import render_to_string
 from blog.models import Post
 from job.models import JobAdvertisement
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeForm
 
 
 def sign_up(request):
@@ -25,10 +23,9 @@ def sign_up(request):
             username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-            first_name = form.cleaned_data.get("first_name")
-            last_name = form.cleaned_data.get("last_name")
 
-            newUser = User(username=username, email=email, first_name=first_name, last_name=last_name)
+
+            newUser = User(username=username, email=email)
             newUser.set_password(password)
 
             # kullanıcıyı kayıt ettik ve doğrudan login yaptık
@@ -111,11 +108,13 @@ def profile(request, slug):
     profile_detail = get_object_or_404(Profile, slug=slug)
     user_posts = Post.objects.filter(author=profile_detail.id)
     user_jobs = JobAdvertisement.objects.filter(employer=profile_detail.id)
+
     context = {
         "profile_detail": profile_detail,
         "user_posts": user_posts,
-        "user_jobs": user_jobs
+        "user_jobs": user_jobs,
     }
+
     return render(request, "profile_pages/profile.html", context)
 
 
@@ -144,7 +143,7 @@ def update_profile(request):
     form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
     if profile.user != request.user:
         messages.error(request, "Bu işlem için yetkili değilsiniz!")
-        return redirect("user:profile", slug=profile.slug)
+        return redirect("my_profile")
 
     else:
         if form.is_valid():
@@ -155,9 +154,30 @@ def update_profile(request):
             form.save_m2m()
 
             messages.success(request, "Profil bilgileri başarıyla değiştirildi!")
-            return redirect("user:profile", slug=profile.slug)
+            return redirect("my_profile")
         context = {
             "profile": profile,
             "form": form,
         }
     return render(request, "profile_pages/edit_profile.html", context)
+
+
+@login_required
+def github_password(request):
+    if request.user.has_usable_password():
+        PasswordForm = PasswordChangeForm
+    else:
+        PasswordForm = AdminPasswordChangeForm
+
+    if request.method == 'POST':
+        form = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Parolanız başarıyla güncellendi!')
+            return redirect('my_profile')
+        else:
+            messages.error(request, 'Lütfen hataları düzeltin.')
+    else:
+        form = PasswordForm(request.user)
+    return render(request, 'login_logout_signup/github_password_set.html', {'form': form})

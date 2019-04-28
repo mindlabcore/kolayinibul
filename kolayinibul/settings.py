@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'robots',
+    'widget_tweaks',
+    'social_django',
 ]
 
 SITE_ID = 1
@@ -63,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'kolayinibul.urls'
@@ -84,7 +87,8 @@ TEMPLATES = [
                 'base_pages.views.big_box',
                 'base_pages.views.second_box',
                 'base_pages.views.third_box',
-
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
 
             ],
         },
@@ -124,6 +128,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -166,8 +178,17 @@ CKEDITOR_CONFIGS = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = '/user/login/'
+LOGOUT_URL = '/user/logout/'
+
+# Github Login Issues
+
+SOCIAL_AUTH_GITHUB_KEY = '422b821bc5dcf3fa95f7'
+SOCIAL_AUTH_GITHUB_SECRET = 'd171fed953f8d846a736624e2652ca70d8419986'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/my_profile/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/my_profile/'
+SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 
 # Yandex Mail SMTP Setup
 EMAIL_HOST = 'smtp.yandex.ru'

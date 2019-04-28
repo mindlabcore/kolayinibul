@@ -5,6 +5,7 @@
 
 
 {% block body %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-social.css' %}"/>
     <section class="s-content">
         {% csrf_token %}
         <div class="row" style="
@@ -30,12 +31,15 @@ text-align: center;">
 
                     </button>
                     <hr>
-
+                    <a href="{% url 'social:begin' 'github' %}"
+                       class="btn btn-primary" role="button"><i class="fab fa-github fa-2x"></i> Sign in with GitHub</a>
                     <a href="{% url 'user:sign_up' %}"
-                       class="btn btn--stroke" role="button">Üye Ol</a>
+                       class="btn btn-primary" role="button">Üye Ol</a>
                     <hr>
                     <a href="{% url 'password_reset' %}"
                        class="btn btn-primary" role="button">Parolamı Unuttum :(</a>
+                    <hr>
+
 
 
                 </form>
@@ -46,4 +50,3 @@ text-align: center;">
     </section>
 
 {% endblock %}
-

@@ -1,0 +1,89 @@
+{% extends "base/layout.html" %}
+{% load static %}
+{% include 'base/components/scripts.html' %}
+{% block title %}Yeni Post - {{ block.super }}{% endblock %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+    <section class="s-content" style="padding-top: 0px">
+        <section id="styles" class="s-styles">
+            <div class="row">
+                <div class="col-full tab-full">
+                    <div class="heading">
+                        <h2>Yeni Post Yaz</h2>
+                    </div>
+                    <hr>
+
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field }}
+                        {% endfor %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert-box alert-danger" role="alert">
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        {% for field in form.visible_fields %}
+                            <div class="form-group">
+                                {{ field.label_tag }}
+
+                                {% if form.is_bound %}
+                                    {% if field.errors %}
+                                        {% render_field field class="form-control is-invalid" %}
+                                        {% for error in field.errors %}
+                                            <div class="invalid-feedback">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field field class="form-control is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field field class="form-control" %}
+                                {% endif %}
+
+                                {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form> <!-- end form -->
+                    <br>
+                    <hr>
+                    <br>
+
+
+                    <!--
+                    <form name="contactForm" id="contactForm" method="post"
+                              action="">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="message form-field">
+                                    <textarea name="comment_content" id="comment_content" class="full-width"
+                                              placeholder="Yorumunuz"  style="min-height: 16rem"></textarea>
+                                </div>
+
+                                <button type="submit" class="submit btn--primary btn--large full-width">Yorumu Gönder!
+                                </button>
+
+                            </fieldset>
+                        </form> -->
+                    <!-- end form -->
+
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+
+{% endblock body %}

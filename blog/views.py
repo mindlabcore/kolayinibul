@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, reverse
-from .forms import PostForm
+from .forms import PostForm, PostForm2, ColorfulContactForm
 from django.contrib import messages
 from .models import Post, Category, SubCategory, Comment
 from django.contrib.auth.decorators import login_required
@@ -124,5 +124,19 @@ def add_comment(request, slug):
         return redirect(reverse("posts:detail", kwargs={"slug": slug}))
 
 
+@login_required
+def add_post2(request):
+    form = ColorfulContactForm(request.POST or None, request.FILES or None)
 
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.author = request.user
+        post.save()
+        form.save_m2m()
 
+        messages.success(request,
+                         "Post başarıyla oluşturuldu! Düzenleyebilmen için taslak halinde profilinde seni bekliyor. "
+                         "Tek yapman gereken yayına almak!")
+        return redirect("my_profile")
+
+    return render(request, "post_pages/new_post_test.html", {"form": form})

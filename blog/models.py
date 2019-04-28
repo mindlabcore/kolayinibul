@@ -67,7 +67,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50, verbose_name="Post Başlığı")
     slug = models.SlugField(max_length=55, blank=True, null=True)
     description = RichTextField(max_length=100000, null=False, verbose_name="Açıklama")
-    image = models.ImageField(upload_to='story_images/', null=True, blank=True,
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True,
                               default='')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created Date")
     updated_date = models.DateTimeField(blank=True, null=True, verbose_name="Updated Date")

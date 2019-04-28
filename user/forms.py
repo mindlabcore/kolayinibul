@@ -22,8 +22,7 @@ class SignupForm(forms.Form):
         password = self.cleaned_data.get("password")
         confirm = self.cleaned_data.get("confirm")
         email = self.cleaned_data.get("email")
-        first_name = self.cleaned_data.get("first_name")
-        last_name = self.cleaned_data.get("last_name")
+
 
         if password and confirm and password != confirm:
             raise forms.ValidationError("Parolalar birbiriyle uyuşmuyor!")
@@ -32,8 +31,7 @@ class SignupForm(forms.Form):
             "username": username,
             "password": password,
             "email": email,
-            "first_name": first_name,
-            "last_name": last_name,
+
 
         }
         return values

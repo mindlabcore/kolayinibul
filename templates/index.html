@@ -1,7 +1,8 @@
 {% extends "base/layout.html" %}
 {% load static %}
-{% block body %}{% include "base/components/carousel.html" %}
-
+{% block body %}
+    {% include "base/components/carousel.html" %}
+<br>
 
 
     <section class="s-content">
@@ -12,18 +13,22 @@
 
                     {% if  forloop.counter == 5 %}
                         <h1></h1>
+
                     {% else %}
 
                     {% endif %}
                     <article class="masonry__brick entry format-standard" data-aos="fade-up">
-
                         <div class="entry__thumb">
+                            {% if post.image %}
                             <a href="{% url 'posts:detail' slug=post.slug %}" class="entry__thumb-link">
-                                <img src="images/thumbs/masonry/tulips-400.jpg"
-                                     srcset="images/thumbs/masonry/tulips-400.jpg 1x, images/thumbs/masonry/tulips-800.jpg 2x"
+                                <img src="{{ post.image.url }}"
+
                                      alt="">
                             </a>
+                            {% else %}
+                            {% endif %}
                         </div>
+
 
                         <div class="entry__text" style="padding-bottom: 1rem">
                             <div class="entry__header">
@@ -41,7 +46,7 @@
 
                             <div class="entry__excerpt">
                                 <p>
-                                    {{ post.description|striptags|truncatewords:45|safe }}
+                                    {{ post.description|striptags|truncatewords:24|safe }}
                                 </p>
                             </div>
 
@@ -78,20 +83,7 @@
                     </article> <!-- end article -->
                 {% endfor %}
 
-                <article class="masonry__brick entry format-standard" data-aos="fade-up">
 
-
-                    <a target="_blank" href="http://www.exoclick.com/?login=badpanty"><img
-                            style="height: auto;width: 330px" src="http://www.exoclick.com/banners/300x425.gif"
-                            border="0"></a>
-                </article>
-
-                <article class="masonry__brick entry format-standard" data-aos="fade-up">
-
-                    <script type="text/javascript" data-idzone="3358740"
-                            src="https://ads.exdynsrv.com/nativeads.js"></script>
-
-                </article>
             </div> <!-- end masonry -->
         </div> <!-- end masonry-wrap -->
 

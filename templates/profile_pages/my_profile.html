@@ -15,14 +15,18 @@
                 <div class="row">
 
                     <div class="col-sm-3" style="border: #EFC702 dashed 2px; padding: 19px"><!--left col-->
-                    <a class="btn btn-primary" href="{% url 'user:update_profile' %}">Profilini Güncelle</a>
+
                         <div class="text-center">
-                            <h1 align="center">{{ profile_detail.user }}</h1>
+
+                            <h1 align="center" style="margin-top: 0rem">{{ profile_detail.user }}</h1>
                             <img src="{{ profile_detail.avatar.url }}" class="avatar img-circle img-thumbnail"
                                  alt="avatar" style="width: 150px;height: 150px">
+                            <br>
+                            <a class="btn btn-primary" href="{% url 'user:update_profile' %}">Profilini Güncelle</a>
                         </div>
+                    <hr>
                         <div style="text-align: justify;word-wrap: break-spaces;width: 155px">
-                            <hr>
+
                             <p>{{ profile_detail.bio }}</p>
                         </div>
                         <hr>
@@ -85,6 +89,23 @@
                                 {% else %}
                                 {% endif %}
                             </div>
+                            <hr>
+                            {% if github_login %}
+                                <p>Connected as <a href="https://github.com/{{ github_login.extra_data.login }}/"
+                                                   target="_blank">{{ github_login.extra_data.login }}</a></p>
+                                {% if can_disconnect %}
+                                    <form method="post" action="{% url 'social:disconnect' 'github' %}">
+                                        {% csrf_token %}
+                                        <button class="btn--primary" type="submit">Disconnect f/ GitHub</button>
+                                    </form>
+                                {% else %}
+                                    <button type="button" disabled>Disconnect from GitHub</button>
+                                    <p style="color: red">You must <a href="{% url 'password' %}">define a password</a>
+                                        for your account before disconnecting from Github.</p>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'social:begin' 'github' %}">Connect to GitHub</a>
+                            {% endif %}
                         </div>
 
                     </div><!--/col-3-->
@@ -94,28 +115,41 @@
                                 <br><br><br>
                                 <a href="{% url 'my_posts' %}"><h6>Yayınladığım Postlarım</h6></a>
                                 <ul>
+                                {% if user_posts %}
                                     {% for post in user_posts %}
-                                    <li>
-                                        <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a>
-                                    </li>
+                                        <li>
+                                            <a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a>
+                                        </li>
                                     {% endfor %}
+                                {% else %}
+                                    <li><a href="{% url 'posts:add_post' %}">Hiç postunuz yok. Hemen oluşturun!</a>
+                                </li>
+                                {% endif %}
                                 </ul>
                             </div>
-                        <div class="table-bordered">
+                            <div class="table-bordered">
                                 <br><br><br>
                                 <a href="{% url 'my_jobs' %}"><h6>Yayınladığım İş İlanlarım</h6></a>
                                 <ul>
+                                {% if user_jobs %}
                                     {% for job in user_jobs %}
-                                    <li>
-                                        <a href="{% url 'jobs:detail' slug=job.slug %}">{{ job.title }}</a>
-                                    </li>
+                                        <li>
+                                            <a href="{% url 'jobs:detail' slug=job.slug %}">{{ job.title }}</a>
+                                        </li>
                                     {% endfor %}
+                                {% else %}
+                                <li>
+                                    <a href="{% url 'jobs:add_job' %}">Hiç iş ilanınız yok. Hemen oluşturun!</a>
+                                </li>
+                                {% endif %}
                                 </ul>
                             </div>
 
 
                         </div><!--/tab-pane-->
                     </div><!--/tab-content-->
+
+
 
                 </div><!--/col-9-->
             </div><!--/row-->
