@@ -184,6 +184,7 @@ h1, .h1 {
 
 @media only screen and (max-width: 600px) {
     h1, .h1 {
+        padding-top: 24px;
         font-size: 3rem !important;
         letter-spacing: -.07rem;
     }
@@ -4335,9 +4336,9 @@ input:focus::-webkit-input-placeholder {
 }
 
 
-@media only screen and (max-width: 480px){
+@media only screen and (max-width: 480px) {
     .bcAds {
-    display: none;
+        display: none;
         height: 100%;
         width: 100%;
         margin: 0;
